@@ -25,6 +25,7 @@ const userSchema = new Schema<IUser>(
             required: function () {
                 return this.provider === "Email";
             },
+            default: null,
         },
         provider: {
             type: String,

@@ -13,12 +13,23 @@ exports.userController = void 0;
 const user_service_1 = require("./user.service");
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userInfo = req.body;
+    // console.log(userInfo);
     try {
+        if (userInfo.provider !== "Email" && !userInfo.password) {
+            userInfo.password = null;
+        }
         const newUser = yield user_service_1.userServices.registerUser(userInfo);
+        console.log(newUser);
         res.status(201).json({
             success: true,
             message: "User registered successfully.",
-            user: newUser,
+            user: {
+                _id: newUser._id.toString(),
+                name: newUser.name,
+                email: newUser.email,
+                image: newUser.image,
+                provider: newUser.provider,
+            },
         });
     }
     catch (error) {
@@ -28,6 +39,29 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         });
     }
 });
+const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield user_service_1.userServices.loginUser(req.body.email, req.body.password);
+        res.json({
+            success: true,
+            message: "Login successful",
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                image: user.image,
+                provider: user.provider,
+            },
+        });
+    }
+    catch (error) {
+        res.status(401).json({
+            success: false,
+            message: error.message,
+        });
+    }
+});
 exports.userController = {
     registerUser,
+    login,
 };

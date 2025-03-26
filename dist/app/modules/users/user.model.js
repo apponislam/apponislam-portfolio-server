@@ -37,6 +37,7 @@ const userSchema = new mongoose_1.Schema({
         required: function () {
             return this.provider === "Email";
         },
+        default: null,
     },
     provider: {
         type: String,
