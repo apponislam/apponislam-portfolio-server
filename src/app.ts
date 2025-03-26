@@ -4,7 +4,8 @@ import cors from "cors";
 import { userRoute } from "./app/modules/users/user.route";
 
 app.use(express.json());
-app.use(cors());
+// app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
+app.use(cors({ origin: "*", credentials: true }));
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Hello World!");

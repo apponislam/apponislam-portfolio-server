@@ -8,7 +8,8 @@ const app = (0, express_1.default)();
 const cors_1 = __importDefault(require("cors"));
 const user_route_1 = require("./app/modules/users/user.route");
 app.use(express_1.default.json());
-app.use((0, cors_1.default)());
+// app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
+app.use((0, cors_1.default)({ origin: "*", credentials: true }));
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
