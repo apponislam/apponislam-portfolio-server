@@ -66,7 +66,32 @@ const getAllProjects = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
 });
+const getSingleProject = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const projectId = req.params.id;
+        const project = yield project_services_1.projectServices.findProjectById(projectId);
+        if (!project) {
+            res.status(404).json({
+                success: false,
+                message: "Project not found.",
+            });
+            return;
+        }
+        res.status(200).json({
+            success: true,
+            message: "Project retrieved successfully.",
+            data: project,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to retrieve the project.",
+        });
+    }
+});
 exports.projectController = {
     postProject,
     getAllProjects,
+    getSingleProject,
 };

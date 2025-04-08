@@ -9,4 +9,5 @@ const project_controller_1 = require("./project.controller");
 const router = express_1.default.Router();
 router.post("/", project_controller_1.projectController.postProject);
 router.get("/", project_controller_1.projectController.getAllProjects);
+router.get("/:id", project_controller_1.projectController.getSingleProject);
 exports.projectRoute = router;

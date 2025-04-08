@@ -25,7 +25,15 @@ const findAllProjects = () => __awaiter(void 0, void 0, void 0, function* () {
     });
     return messages;
 });
+const findProjectById = (projectId) => __awaiter(void 0, void 0, void 0, function* () {
+    const project = yield project_model_1.default.findById(projectId).populate({
+        path: "userId",
+        select: "-password",
+    });
+    return project;
+});
 exports.projectServices = {
     postProject,
     findAllProjects,
+    findProjectById,
 };
