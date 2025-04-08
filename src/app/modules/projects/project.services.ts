@@ -14,7 +14,17 @@ const findAllProjects = async () => {
     return messages;
 };
 
+const findProjectById = async (projectId: string) => {
+    const project = await projectsModel.findById(projectId).populate({
+        path: "userId",
+        select: "-password",
+    });
+
+    return project;
+};
+
 export const projectServices = {
     postProject,
     findAllProjects,
+    findProjectById,
 };

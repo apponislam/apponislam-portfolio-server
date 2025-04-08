@@ -60,7 +60,35 @@ const getAllProjects = async (req: Request, res: Response) => {
     }
 };
 
+const getSingleProject = async (req: Request, res: Response) => {
+    try {
+        const projectId = req.params.id;
+
+        const project = await projectServices.findProjectById(projectId);
+
+        if (!project) {
+            res.status(404).json({
+                success: false,
+                message: "Project not found.",
+            });
+            return;
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Project retrieved successfully.",
+            data: project,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to retrieve the project.",
+        });
+    }
+};
+
 export const projectController = {
     postProject,
     getAllProjects,
+    getSingleProject,
 };
