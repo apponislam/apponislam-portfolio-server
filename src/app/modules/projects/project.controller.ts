@@ -87,8 +87,59 @@ const getSingleProject = async (req: Request, res: Response) => {
     }
 };
 
+const updateProject = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const payload = req.body;
+
+    console.log("Update payload:", payload);
+
+    if (!id) {
+        res.status(400).json({
+            success: false,
+            message: "Project ID is required.",
+        });
+        return;
+    }
+
+    try {
+        const requiredFields = ["type", "companyName", "shortDescription"];
+        const missingFields = requiredFields.filter((field) => !payload[field]);
+
+        if (missingFields.length > 0) {
+            res.status(400).json({
+                success: false,
+                message: `Missing required fields: ${missingFields.join(", ")}`,
+            });
+            return;
+        }
+
+        const updatedProject = await projectServices.updateProject(id, payload);
+
+        if (!updatedProject) {
+            res.status(404).json({
+                success: false,
+                message: "Project not found.",
+            });
+            return;
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Project updated successfully.",
+            data: updatedProject,
+        });
+    } catch (error) {
+        console.error("Update error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to update project.",
+        });
+    }
+};
+
 export const projectController = {
     postProject,
     getAllProjects,
     getSingleProject,
+    updateProject,
 };

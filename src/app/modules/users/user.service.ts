@@ -28,7 +28,6 @@ const loginUser = async (email: string, password: string) => {
     const user = await userModel.findOne({ email });
     if (!user) throw new Error("User not found");
 
-    // Check password for email users
     if (user.provider === "Email") {
         if (!user.password) throw new Error("Password not set");
         const isMatch = await bcrypt.compare(password, user.password);
@@ -38,7 +37,15 @@ const loginUser = async (email: string, password: string) => {
     return user;
 };
 
+const getUserById = async (id: string) => {
+    const user = await userModel.findById(id).lean();
+    if (!user) throw new Error("User not found");
+    delete user.password;
+    return user;
+};
+
 export const userServices = {
     registerUser,
     loginUser,
+    getUserById,
 };
