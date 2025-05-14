@@ -23,8 +23,17 @@ const findProjectById = async (projectId: string) => {
     return project;
 };
 
+const updateProject = async (id: string, payload: Partial<IProjectsInterface>) => {
+    const updatedProject = await projectsModel.findByIdAndUpdate(id, payload, { new: true, runValidators: true }).populate({
+        path: "userId",
+        select: "-password",
+    });
+    return updatedProject;
+};
+
 export const projectServices = {
     postProject,
     findAllProjects,
     findProjectById,
+    updateProject,
 };

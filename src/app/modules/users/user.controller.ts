@@ -3,7 +3,6 @@ import { userServices } from "./user.service";
 
 const registerUser = async (req: Request, res: Response) => {
     const userInfo = req.body;
-    // console.log(userInfo);
 
     try {
         if (userInfo.provider !== "Email" && !userInfo.password) {
@@ -55,7 +54,23 @@ const login = async (req: Request, res: Response) => {
     }
 };
 
+const getUserById = async (req: Request, res: Response) => {
+    try {
+        const user = await userServices.getUserById(req.params.id);
+        res.json({
+            success: true,
+            user,
+        });
+    } catch (error: any) {
+        res.status(404).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
 export const userController = {
     registerUser,
     login,
+    getUserById,
 };
