@@ -137,9 +137,46 @@ const updateProject = async (req: Request, res: Response) => {
     }
 };
 
+const deleteProject = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    if (!id) {
+        res.status(400).json({
+            success: false,
+            message: "Project ID is required.",
+        });
+        return;
+    }
+
+    try {
+        const deletedProject = await projectServices.deleteProject(id);
+
+        if (!deletedProject) {
+            res.status(404).json({
+                success: false,
+                message: "Project not found.",
+            });
+            return;
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Project deleted successfully.",
+            data: deletedProject,
+        });
+    } catch (error) {
+        console.error("Delete error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to delete project.",
+        });
+    }
+};
+
 export const projectController = {
     postProject,
     getAllProjects,
     getSingleProject,
     updateProject,
+    deleteProject,
 };

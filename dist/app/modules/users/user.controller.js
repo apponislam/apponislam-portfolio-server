@@ -13,7 +13,6 @@ exports.userController = void 0;
 const user_service_1 = require("./user.service");
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userInfo = req.body;
-    // console.log(userInfo);
     try {
         if (userInfo.provider !== "Email" && !userInfo.password) {
             userInfo.password = null;
@@ -61,7 +60,23 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
+const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield user_service_1.userServices.getUserById(req.params.id);
+        res.json({
+            success: true,
+            user,
+        });
+    }
+    catch (error) {
+        res.status(404).json({
+            success: false,
+            message: error.message,
+        });
+    }
+});
 exports.userController = {
     registerUser,
     login,
+    getUserById,
 };

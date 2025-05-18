@@ -9,4 +9,5 @@ const user_controller_1 = require("./user.controller");
 const router = express_1.default.Router();
 router.post("/register", user_controller_1.userController.registerUser);
 router.post("/login", user_controller_1.userController.login);
+router.get("/:id", user_controller_1.userController.getUserById);
 exports.userRoute = router;

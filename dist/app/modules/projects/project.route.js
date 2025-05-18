@@ -10,4 +10,6 @@ const router = express_1.default.Router();
 router.post("/", project_controller_1.projectController.postProject);
 router.get("/", project_controller_1.projectController.getAllProjects);
 router.get("/:id", project_controller_1.projectController.getSingleProject);
+router.patch("/:id", project_controller_1.projectController.updateProject);
+router.delete("/:id", project_controller_1.projectController.deleteProject);
 exports.projectRoute = router;
