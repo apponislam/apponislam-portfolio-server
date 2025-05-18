@@ -32,8 +32,21 @@ const findProjectById = (projectId) => __awaiter(void 0, void 0, void 0, functio
     });
     return project;
 });
+const updateProject = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const updatedProject = yield project_model_1.default.findByIdAndUpdate(id, payload, { new: true, runValidators: true }).populate({
+        path: "userId",
+        select: "-password",
+    });
+    return updatedProject;
+});
+const deleteProject = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const deletedProject = yield project_model_1.default.findByIdAndDelete(id);
+    return deletedProject;
+});
 exports.projectServices = {
     postProject,
     findAllProjects,
     findProjectById,
+    updateProject,
+    deleteProject,
 };

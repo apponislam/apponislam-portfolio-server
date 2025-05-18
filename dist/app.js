@@ -9,6 +9,8 @@ const cors_1 = __importDefault(require("cors"));
 const user_route_1 = require("./app/modules/users/user.route");
 const message_route_1 = require("./app/modules/messages/message.route");
 const project_route_1 = require("./app/modules/projects/project.route");
+const blog_route_1 = require("./app/modules/blogs/blog.route");
+const skills_route_1 = require("./app/modules/skills/skills.route");
 app.use(express_1.default.json());
 // app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
 app.use((0, cors_1.default)({ origin: "*", credentials: true }));
@@ -18,4 +20,6 @@ app.get("/", (req, res) => {
 app.use("/api/v1/users", user_route_1.userRoute);
 app.use("/api/v1/messages", message_route_1.messageRoute);
 app.use("/api/v1/project", project_route_1.projectRoute);
+app.use("/api/v1/blog", blog_route_1.blogRoute);
+app.use("/api/v1/skills", skills_route_1.skillRoutes);
 exports.default = app;

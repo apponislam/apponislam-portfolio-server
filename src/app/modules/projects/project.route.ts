@@ -7,5 +7,6 @@ router.post("/", projectController.postProject);
 router.get("/", projectController.getAllProjects);
 router.get("/:id", projectController.getSingleProject);
 router.patch("/:id", projectController.updateProject);
+router.delete("/:id", projectController.deleteProject);
 
 export const projectRoute = router;

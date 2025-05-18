@@ -31,9 +31,15 @@ const updateProject = async (id: string, payload: Partial<IProjectsInterface>) =
     return updatedProject;
 };
 
+const deleteProject = async (id: string) => {
+    const deletedProject = await projectsModel.findByIdAndDelete(id);
+    return deletedProject;
+};
+
 export const projectServices = {
     postProject,
     findAllProjects,
     findProjectById,
     updateProject,
+    deleteProject,
 };

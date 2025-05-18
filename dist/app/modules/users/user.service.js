@@ -37,7 +37,6 @@ const loginUser = (email, password) => __awaiter(void 0, void 0, void 0, functio
     const user = yield user_model_1.userModel.findOne({ email });
     if (!user)
         throw new Error("User not found");
-    // Check password for email users
     if (user.provider === "Email") {
         if (!user.password)
             throw new Error("Password not set");
@@ -47,7 +46,15 @@ const loginUser = (email, password) => __awaiter(void 0, void 0, void 0, functio
     }
     return user;
 });
+const getUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield user_model_1.userModel.findById(id).lean();
+    if (!user)
+        throw new Error("User not found");
+    delete user.password;
+    return user;
+});
 exports.userServices = {
     registerUser,
     loginUser,
+    getUserById,
 };
