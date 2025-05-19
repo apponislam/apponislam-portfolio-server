@@ -12,8 +12,10 @@ const project_route_1 = require("./app/modules/projects/project.route");
 const blog_route_1 = require("./app/modules/blogs/blog.route");
 const skills_route_1 = require("./app/modules/skills/skills.route");
 app.use(express_1.default.json());
-// app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
-app.use((0, cors_1.default)({ origin: "*", credentials: true }));
+app.use((0, cors_1.default)({
+    origin: ["http://localhost:3000", "https://apponislam-portfolio-with-next-js.vercel.app"],
+    credentials: true,
+}));
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });

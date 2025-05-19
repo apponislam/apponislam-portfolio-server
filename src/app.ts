@@ -8,8 +8,12 @@ import { blogRoute } from "./app/modules/blogs/blog.route";
 import { skillRoutes } from "./app/modules/skills/skills.route";
 
 app.use(express.json());
-// app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
-app.use(cors({ origin: "*", credentials: true }));
+app.use(
+    cors({
+        origin: ["http://localhost:3000", "https://apponislam-portfolio-with-next-js.vercel.app"],
+        credentials: true,
+    })
+);
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Hello World!");
