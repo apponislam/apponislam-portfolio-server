@@ -6,7 +6,7 @@ const createSkills = async (techData: ISkills) => {
 };
 
 const getAllSkills = async () => {
-    return await slillsModel.find().sort({ createdAt: -1 });
+    return await slillsModel.find();
 };
 
 const getSkillsById = async (id: string) => {

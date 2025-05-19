@@ -15,7 +15,7 @@ const createSkills = (techData) => __awaiter(void 0, void 0, void 0, function* (
     return yield skills_model_1.slillsModel.create(techData);
 });
 const getAllSkills = () => __awaiter(void 0, void 0, void 0, function* () {
-    return yield skills_model_1.slillsModel.find().sort({ createdAt: -1 });
+    return yield skills_model_1.slillsModel.find();
 });
 const getSkillsById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return yield skills_model_1.slillsModel.findById(id);
