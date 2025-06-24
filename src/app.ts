@@ -10,7 +10,7 @@ import { skillRoutes } from "./app/modules/skills/skills.route";
 app.use(express.json());
 app.use(
     cors({
-        origin: ["http://localhost:3000", "https://apponislam-portfolio-with-next-js.vercel.app"],
+        origin: ["http://localhost:3000", "https://apponislam-portfolio-with-next-js.vercel.app", "https://apponislam.4ppon.com"],
         credentials: true,
     })
 );

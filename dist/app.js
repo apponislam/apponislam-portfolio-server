@@ -13,7 +13,7 @@ const blog_route_1 = require("./app/modules/blogs/blog.route");
 const skills_route_1 = require("./app/modules/skills/skills.route");
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
-    origin: ["http://localhost:3000", "https://apponislam-portfolio-with-next-js.vercel.app"],
+    origin: ["http://localhost:3000", "https://apponislam-portfolio-with-next-js.vercel.app", "https://apponislam.4ppon.com"],
     credentials: true,
 }));
 app.get("/", (req, res) => {
