@@ -18,12 +18,26 @@ const postProject = (payload) => __awaiter(void 0, void 0, void 0, function* () 
     const newProject = yield project_model_1.default.create(payload);
     return newProject;
 });
-const findAllProjects = () => __awaiter(void 0, void 0, void 0, function* () {
-    const messages = yield project_model_1.default.find().populate({
-        path: "userId",
-        select: "-password",
-    });
-    return messages;
+const findAllProjects = (_a) => __awaiter(void 0, [_a], void 0, function* ({ page = 1, limit = 10, search = "", type }) {
+    const filter = {};
+    // Search filter
+    if (search) {
+        filter.$or = [{ companyName: { $regex: search, $options: "i" } }, { shortDescription: { $regex: search, $options: "i" } }, { "descriptionDetails.paragraphs": { $regex: search, $options: "i" } }];
+    }
+    // Type filter
+    if (type) {
+        filter.type = type;
+    }
+    const skip = (page - 1) * limit;
+    const [projects, total] = yield Promise.all([project_model_1.default.find(filter).populate({ path: "userId", select: "-password" }).sort({ startDate: 1 }).skip(skip).limit(limit), project_model_1.default.countDocuments(filter)]);
+    return {
+        data: projects,
+        meta: {
+            page,
+            limit,
+            total,
+        },
+    };
 });
 const findProjectById = (projectId) => __awaiter(void 0, void 0, void 0, function* () {
     const project = yield project_model_1.default.findById(projectId).populate({

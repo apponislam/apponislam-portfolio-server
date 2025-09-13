@@ -6,12 +6,38 @@ const postProject = async (payload: IProjectsInterface) => {
     return newProject;
 };
 
-const findAllProjects = async () => {
-    const messages = await projectsModel.find().populate({
-        path: "userId",
-        select: "-password",
-    });
-    return messages;
+interface FindAllOptions {
+    page?: number;
+    limit?: number;
+    search?: string;
+    type?: "Personal Project" | "Professional";
+}
+
+const findAllProjects = async ({ page = 1, limit = 10, search = "", type }: FindAllOptions) => {
+    const filter: Record<string, any> = {};
+
+    // Search filter
+    if (search) {
+        filter.$or = [{ companyName: { $regex: search, $options: "i" } }, { shortDescription: { $regex: search, $options: "i" } }, { "descriptionDetails.paragraphs": { $regex: search, $options: "i" } }];
+    }
+
+    // Type filter
+    if (type) {
+        filter.type = type;
+    }
+
+    const skip = (page - 1) * limit;
+
+    const [projects, total] = await Promise.all([projectsModel.find(filter).populate({ path: "userId", select: "-password" }).sort({ startDate: 1 }).skip(skip).limit(limit), projectsModel.countDocuments(filter)]);
+
+    return {
+        data: projects,
+        meta: {
+            page,
+            limit,
+            total,
+        },
+    };
 };
 
 const findProjectById = async (projectId: string) => {

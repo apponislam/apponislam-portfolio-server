@@ -1,11 +1,9 @@
 import express, { Application, Request, Response } from "express";
 const app: Application = express();
 import cors from "cors";
-import { userRoute } from "./app/modules/users/user.route";
-import { messageRoute } from "./app/modules/messages/message.route";
-import { projectRoute } from "./app/modules/projects/project.route";
-import { blogRoute } from "./app/modules/blogs/blog.route";
-import { skillRoutes } from "./app/modules/skills/skills.route";
+import router from "./routes";
+import notFound from "./errors/notFound";
+import globalErrorHandler from "./errors/globalErrorhandler";
 
 app.use(express.json());
 app.use(
@@ -19,10 +17,9 @@ app.get("/", (req: Request, res: Response) => {
     res.sendFile("public/index.html", { root: "." });
 });
 
-app.use("/api/v1/users", userRoute);
-app.use("/api/v1/messages", messageRoute);
-app.use("/api/v1/project", projectRoute);
-app.use("/api/v1/blog", blogRoute);
-app.use("/api/v1/skills", skillRoutes);
+app.use("/api/v1", router);
+
+app.use(notFound);
+app.use(globalErrorHandler);
 
 export default app;

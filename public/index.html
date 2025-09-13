@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -373,6 +373,411 @@
                 const subject = encodeURIComponent("Project inquiry from " + (name || email));
                 const body = encodeURIComponent("Name: " + name + "\\nEmail: " + email + "\\n\\n" + msg);
                 window.location.href = "mailto:your.email@example.com?subject=" + subject + "&body=" + body;
+            }
+        </script>
+    </body>
+</html> -->
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Md. Appon Islam — Full-Stack Developer</title>
+        <meta name="description" content="Md. Appon Islam — Full-Stack Developer. Building beautiful, fast web apps with Node.js, Next.js, and modern frontend stacks." />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+        <style>
+            :root {
+                --bg: #0f1724;
+                --card: #0b1220;
+                --muted: #94a3b8;
+                --accent: #7c3aed;
+                --glass: rgba(255, 255, 255, 0.04);
+                --radius: 16px;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                font-family:
+                    "Inter",
+                    system-ui,
+                    -apple-system,
+                    "Segoe UI",
+                    Roboto,
+                    "Helvetica Neue",
+                    Arial;
+                background: linear-gradient(180deg, #051025 0%, #081226 100%);
+                color: #e6eef8;
+                line-height: 1.5;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                margin: 0;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 48px auto;
+                padding: 24px;
+            }
+
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+            }
+            .logo {
+                width: 56px;
+                height: 56px;
+                border-radius: var(--radius);
+                background: linear-gradient(135deg, var(--accent), #5b21b6);
+                display: grid;
+                place-items: center;
+                font-weight: 800;
+                color: white;
+                box-shadow: 0 6px 24px rgba(124, 58, 237, 0.2);
+                font-size: 20px;
+            }
+            nav {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            .nav-link {
+                color: var(--muted);
+                padding: 8px 14px;
+                border-radius: 10px;
+                font-weight: 600;
+                font-size: 14px;
+                transition: all 0.2s ease;
+            }
+            .nav-link:hover {
+                color: white;
+                background: var(--glass);
+            }
+
+            main {
+                margin-top: 32px;
+                display: grid;
+                grid-template-columns: 1fr 360px;
+                gap: 32px;
+                align-items: start;
+            }
+            @media (max-width: 900px) {
+                main {
+                    grid-template-columns: 1fr;
+                }
+                .aside {
+                    order: 2;
+                }
+            }
+
+            .hero {
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+                padding: 32px;
+                border-radius: var(--radius);
+                box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
+            }
+            .headline {
+                font-size: 32px;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                margin-bottom: 12px;
+            }
+            .sub {
+                color: var(--muted);
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+            .cta-row {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+                align-items: center;
+                margin-bottom: 24px;
+            }
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                background: var(--accent);
+                color: white;
+                padding: 12px 18px;
+                border-radius: 12px;
+                font-weight: 700;
+                border: none;
+                cursor: pointer;
+                box-shadow: 0 6px 20px rgba(124, 58, 237, 0.2);
+                transition: all 0.2s ease;
+            }
+            .btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 24px rgba(124, 58, 237, 0.25);
+            }
+            .btn.secondary {
+                background: transparent;
+                color: var(--muted);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+            }
+            .btn.secondary:hover {
+                background: var(--glass);
+                color: white;
+            }
+
+            .card {
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+                padding: 20px;
+                border-radius: var(--radius);
+                margin-bottom: 24px;
+            }
+            .projects {
+                display: grid;
+                gap: 14px;
+                margin-top: 16px;
+            }
+            .project {
+                padding: 14px;
+                border-radius: 12px;
+                background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), transparent);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 12px;
+                transition: all 0.2s ease;
+            }
+            .project:hover {
+                background: rgba(255, 255, 255, 0.03);
+            }
+            .project h4 {
+                font-size: 16px;
+                font-weight: 700;
+            }
+            .project p {
+                font-size: 14px;
+                color: var(--muted);
+            }
+
+            .skills {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-top: 12px;
+            }
+            .skill {
+                padding: 8px 12px;
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 999px;
+                font-weight: 600;
+                font-size: 13px;
+                color: var(--muted);
+            }
+
+            .aside {
+                position: relative;
+                top: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+            .profile {
+                display: flex;
+                gap: 16px;
+                align-items: center;
+            }
+            .avatar {
+                width: 88px;
+                height: 88px;
+                border-radius: var(--radius);
+                background: linear-gradient(135deg, #0ea5a9, #7c3aed);
+                display: grid;
+                place-items: center;
+                font-weight: 800;
+                color: white;
+                font-size: 28px;
+            }
+
+            footer {
+                margin-top: 36px;
+                color: var(--muted);
+                font-size: 13px;
+                text-align: center;
+            }
+
+            .contact-card input,
+            .contact-card textarea {
+                margin-bottom: 12px;
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 12px;
+                background: rgba(0, 0, 0, 0.25);
+                border: 1px solid rgba(255, 255, 255, 0.03);
+                color: inherit;
+                font: inherit;
+            }
+            textarea {
+                min-height: 100px;
+                resize: vertical;
+            }
+            .muted {
+                color: var(--muted);
+            }
+            .small {
+                font-size: 13px;
+                color: var(--muted);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" role="main">
+            <header>
+                <div class="brand" aria-label="Brand">
+                    <div class="logo">AI</div>
+                    <div>
+                        <div style="font-weight: 800; font-size: 16px">Md. Appon Islam</div>
+                        <div class="small">Full-Stack Developer • Node.js / Next.js</div>
+                    </div>
+                </div>
+                <nav aria-label="Main navigation">
+                    <a class="nav-link" href="#work">Work</a>
+                    <a class="nav-link" href="#about">About</a>
+                    <a class="nav-link" href="#contact">Contact</a>
+                    <a class="nav-link" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
+                </nav>
+            </header>
+
+            <main>
+                <section>
+                    <div class="hero card" aria-labelledby="hero-title">
+                        <h1 id="hero-title" class="headline">I build fast, reliable web apps — production ready.</h1>
+                        <p class="sub">I craft backend systems with Node.js and delightful frontend experiences using React / Next.js. I focus on performance, clean architecture, and scalable solutions.</p>
+
+                        <div class="cta-row">
+                            <a class="btn" href="#contact">Work with me</a>
+                            <a class="btn secondary" href="#work">View projects</a>
+                            <span class="small muted">Available for freelance & remote roles</span>
+                        </div>
+
+                        <div class="projects" id="work" aria-live="polite">
+                            <div style="margin-top: 18px; font-weight: 700">Selected projects</div>
+
+                            <article class="project" aria-labelledby="p1">
+                                <div>
+                                    <h4 id="p1">Timora — Project Management SaaS</h4>
+                                    <p>Design polish, UI improvements, and performance tuning for a collaborative PM tool.</p>
+                                </div>
+                                <div class="small muted">Next.js • Tailwind • Node</div>
+                            </article>
+
+                            <article class="project" aria-labelledby="p2">
+                                <div>
+                                    <h4 id="p2">ToonMorph — Automated animation pipeline</h4>
+                                    <p>Integrated renderer, backend stitching, storage, and auth using Supabase.</p>
+                                </div>
+                                <div class="small muted">React • Supabase • FFmpeg</div>
+                            </article>
+
+                            <article class="project" aria-labelledby="p3">
+                                <div>
+                                    <h4 id="p3">Real-time Notifications</h4>
+                                    <p>Socket.IO system with auth, realtime feeds, and notification persistence.</p>
+                                </div>
+                                <div class="small muted">Node • Socket.IO • MongoDB</div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="card" id="about">
+                        <h3 style="margin-bottom: 8px">About</h3>
+                        <p class="muted">I’m a pragmatic engineer shipping production-ready features end-to-end: API design, databases, real-time systems, and polished frontends. I follow clean architecture: interface → model → service → controller → route.</p>
+
+                        <div style="margin-top: 12px">
+                            <div style="font-weight: 700; margin-bottom: 8px">Core skills</div>
+                            <div class="skills">
+                                <span class="skill">Node.js</span>
+                                <span class="skill">TypeScript</span>
+                                <span class="skill">Next.js</span>
+                                <span class="skill">React</span>
+                                <span class="skill">Tailwind</span>
+                                <span class="skill">Supabase</span>
+                                <span class="skill">Postgres</span>
+                                <span class="skill">Socket.IO</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="aside">
+                    <div class="card profile" aria-labelledby="profile-name">
+                        <div class="avatar" aria-hidden="true">AI</div>
+                        <div class="meta">
+                            <h3 id="profile-name">Md. Appon Islam</h3>
+                            <p class="muted">Full-Stack Engineer</p>
+                            <p class="small">Based in Bangladesh · Open to freelance & remote work</p>
+                            <div style="margin-top: 10px"><a class="btn" href="mailto:apponislamdev@gmail.com">Email me</a></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4 style="margin-bottom: 8px">Quick contact</h4>
+                        <form class="contact-card" id="contact" onsubmit="event.preventDefault(); contactSubmit();">
+                            <input id="name" name="name" placeholder="Your name" required />
+                            <input id="email" name="email" type="email" placeholder="you@domain.com" required />
+                            <textarea id="message" name="message" placeholder="Short message / project brief" required></textarea>
+                            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap">
+                                <button class="btn" type="submit">Send message</button>
+                                <a class="btn secondary" href="https://www.linkedin.com/in/apponislam" target="_blank" rel="noopener">LinkedIn</a>
+                            </div>
+                            <div class="small muted" style="margin-top: 6px">Or email: <a href="mailto:apponislamdev@gmail.com">apponislamdev@gmail.com</a></div>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h4 style="margin-bottom: 8px">Availability</h4>
+                        <p class="small muted">Usually 20–30 hours/week for freelance projects. I prefer clear scopes, milestones, and direct communication.</p>
+                    </div>
+                </aside>
+            </main>
+
+            <footer>
+                <div class="small muted" id="footer-year"></div>
+            </footer>
+        </div>
+
+        <script>
+            document.getElementById("footer-year").textContent = `© ${new Date().getFullYear()} Md. Appon Islam — Built with Node.js • View source on GitHub`;
+            function contactSubmit() {
+                const name = encodeURIComponent(document.getElementById("name").value || "");
+                const email = encodeURIComponent(document.getElementById("email").value || "");
+                const msg = encodeURIComponent(document.getElementById("message").value || "");
+                const subject = encodeURIComponent("Project inquiry from " + (name || email));
+                const body = encodeURIComponent("Name: " + name + "\\nEmail: " + email + "\\n\\n" + msg);
+                window.location.href = "mailto:apponislamdev@gmail.com?subject=" + subject + "&body=" + body;
             }
         </script>
     </body>
