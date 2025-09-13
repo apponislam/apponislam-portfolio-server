@@ -17,7 +17,7 @@ app.use((0, cors_1.default)({
     credentials: true,
 }));
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.sendFile("public/index.html", { root: "." });
 });
 app.use("/api/v1/users", user_route_1.userRoute);
 app.use("/api/v1/messages", message_route_1.messageRoute);

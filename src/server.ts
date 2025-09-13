@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import app from "./app";
-import config from "./app/config";
+import config from "./config";
 
 main().catch((err) => console.log(err));
 

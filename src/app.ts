@@ -16,7 +16,7 @@ app.use(
 );
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World!");
+    res.sendFile("public/index.html", { root: "." });
 });
 
 app.use("/api/v1/users", userRoute);
