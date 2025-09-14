@@ -1,4 +1,4 @@
-import { IMessage } from "./message.interface";
+import { IMessage, PaginationOptions } from "./message.interface";
 import messageModel from "./message.model";
 
 const postMessage = async (payload: IMessage) => {
@@ -6,9 +6,20 @@ const postMessage = async (payload: IMessage) => {
     return newMessage;
 };
 
-const findAllMessages = async () => {
-    const messages = await messageModel.find();
-    return messages;
+const findAllMessages = async ({ page = 1, limit = 10 }: PaginationOptions = {}) => {
+    const skip = (page - 1) * limit;
+
+    const total = await messageModel.countDocuments();
+    const messages = await messageModel.find().skip(skip).limit(limit);
+
+    return {
+        data: messages,
+        meta: {
+            page,
+            limit,
+            total,
+        },
+    };
 };
 
 export const messageServices = {

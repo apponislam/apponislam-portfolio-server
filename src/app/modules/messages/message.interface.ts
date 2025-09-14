@@ -4,3 +4,8 @@ export interface IMessage {
     message: string;
     social?: string;
 }
+
+export interface PaginationOptions {
+    page?: number;
+    limit?: number;
+}

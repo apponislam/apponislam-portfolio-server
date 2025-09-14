@@ -18,9 +18,18 @@ const postMessage = (payload) => __awaiter(void 0, void 0, void 0, function* () 
     const newMessage = yield message_model_1.default.create(payload);
     return newMessage;
 });
-const findAllMessages = () => __awaiter(void 0, void 0, void 0, function* () {
-    const messages = yield message_model_1.default.find();
-    return messages;
+const findAllMessages = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* ({ page = 1, limit = 10 } = {}) {
+    const skip = (page - 1) * limit;
+    const total = yield message_model_1.default.countDocuments();
+    const messages = yield message_model_1.default.find().skip(skip).limit(limit);
+    return {
+        data: messages,
+        meta: {
+            page,
+            limit,
+            total,
+        },
+    };
 });
 exports.messageServices = {
     postMessage,
