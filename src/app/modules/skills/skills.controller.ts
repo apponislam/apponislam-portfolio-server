@@ -1,144 +1,92 @@
 import { Request, Response } from "express";
 import { skillServices } from "./skills.service";
 import { ISkills } from "./skills.interface";
+import httpStatus from "http-status";
+import catchAsync from "../../../utils/catchAsync";
+import ApiError from "../../../errors/ApiError";
+import sendResponse from "../../../utils/sendResponse";
 
-const createSkills = async (req: Request, res: Response) => {
-    try {
-        const techData: ISkills = req.body;
+const createSkills = catchAsync(async (req: Request, res: Response) => {
+    const techData: ISkills = req.body;
 
-        if (!techData.name || !techData.description || !techData.rating) {
-            res.status(400).json({
-                success: false,
-                message: "Missing required fields: name, description, rating",
-            });
-            return;
-        }
-
-        const newTech = await skillServices.createSkills(techData);
-
-        res.status(201).json({
-            success: true,
-            message: "Skills created successfully",
-            data: newTech,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Failed to create Skills",
-            error: error instanceof Error ? error.message : "Unknown error",
-        });
+    if (!techData.name || !techData.description || !techData.rating) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Missing required fields: name, description, rating");
     }
-};
 
-const getSkills = async (req: Request, res: Response) => {
-    try {
-        const Skills = await skillServices.getAllSkills();
+    const newTech = await skillServices.createSkills(techData);
 
-        if (!Skills || Skills.length === 0) {
-            res.status(404).json({
-                success: false,
-                message: "No Skills found",
-                data: [],
-            });
-            return;
-        }
+    sendResponse(res, {
+        statusCode: httpStatus.CREATED,
+        success: true,
+        message: "Skills created successfully",
+        data: newTech,
+    });
+});
 
-        res.status(200).json({
-            success: true,
-            message: "Skills retrieved successfully",
-            data: Skills,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch Skills",
-            error: error instanceof Error ? error.message : "Unknown error",
-        });
+const getSkills = catchAsync(async (req: Request, res: Response) => {
+    const Skills = await skillServices.getAllSkills();
+
+    if (!Skills || Skills.length === 0) {
+        throw new ApiError(httpStatus.NOT_FOUND, "No Skills found");
     }
-};
 
-const getSkillsById = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params;
-        const Skills = await skillServices.getSkillsById(id);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Skills retrieved successfully",
+        data: Skills,
+    });
+});
 
-        if (!Skills) {
-            res.status(404).json({
-                success: false,
-                message: "Skills not found",
-            });
-            return;
-        }
+const getSkillsById = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const Skills = await skillServices.getSkillsById(id);
 
-        res.status(200).json({
-            success: true,
-            message: "Skills retrieved successfully",
-            data: Skills,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch Skills",
-            error: error instanceof Error ? error.message : "Unknown error",
-        });
+    if (!Skills) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Skills not found");
     }
-};
 
-const updateSkills = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params;
-        const updateData = req.body;
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Skills retrieved successfully",
+        data: Skills,
+    });
+});
 
-        const updatedTech = await skillServices.updateSkills(id, updateData);
+const updateSkills = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const updateData = req.body;
 
-        if (!updatedTech) {
-            res.status(404).json({
-                success: false,
-                message: "Skills not found",
-            });
-            return;
-        }
+    const updatedTech = await skillServices.updateSkills(id, updateData);
 
-        res.status(200).json({
-            success: true,
-            message: "Skills updated successfully",
-            data: updatedTech,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Failed to update Skills",
-            error: error instanceof Error ? error.message : "Unknown error",
-        });
+    if (!updatedTech) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Skills not found");
     }
-};
 
-const deleteSkills = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params;
-        const deletedTech = await skillServices.deleteSkills(id);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Skills updated successfully",
+        data: updatedTech,
+    });
+});
 
-        if (!deletedTech) {
-            res.status(404).json({
-                success: false,
-                message: "Skills not found",
-            });
-            return;
-        }
+const deleteSkills = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const deletedTech = await skillServices.deleteSkills(id);
 
-        res.status(200).json({
-            success: true,
-            message: "Skills deleted successfully",
-            data: deletedTech,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Failed to delete Skills",
-            error: error instanceof Error ? error.message : "Unknown error",
-        });
+    if (!deletedTech) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Skills not found");
     }
-};
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Skills deleted successfully",
+        data: deletedTech,
+    });
+});
 
 export const skillsController = {
     createSkills,
