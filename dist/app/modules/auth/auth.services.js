@@ -54,10 +54,6 @@ const registerUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
         html: (0, verificationEmail_1.generateVerificationEmailTemplate)(user.fullName, verificationUrl),
     });
     const _a = user.toObject(), { password: _ } = _a, userWithoutPassword = __rest(_a, ["password"]);
-    console.log(config_1.default.jwt_access_secret);
-    console.log(config_1.default.jwt_access_expire);
-    console.log(config_1.default.jwt_refresh_secret);
-    console.log(config_1.default.jwt_refresh_expire);
     const accessToken = jwtHelper_1.jwtHelper.generateToken(userWithoutPassword, config_1.default.jwt_access_secret, config_1.default.jwt_access_expire);
     const refreshToken = jwtHelper_1.jwtHelper.generateToken(userWithoutPassword, config_1.default.jwt_refresh_secret, config_1.default.jwt_refresh_expire);
     return { user: userWithoutPassword, accessToken, refreshToken };
@@ -178,9 +174,9 @@ const refreshTokenService = (token) => __awaiter(void 0, void 0, void 0, functio
     const user = yield auth_model_1.AuthModel.findById(decoded._id);
     if (!user)
         throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "User not found");
-    const _a = user.toObject(), { password } = _a, userWithoutPassword = __rest(_a, ["password"]);
-    const newAccessToken = jwtHelper_1.jwtHelper.generateToken(userWithoutPassword, config_1.default.jwt_access_secret, config_1.default.jwt_access_expire);
-    return { accessToken: newAccessToken, user: userWithoutPassword };
+    const _a = user.toObject(), { password, verificationToken, verificationTokenExpiry } = _a, safeUser = __rest(_a, ["password", "verificationToken", "verificationTokenExpiry"]);
+    const newAccessToken = jwtHelper_1.jwtHelper.generateToken(safeUser, config_1.default.jwt_access_secret, config_1.default.jwt_access_expire);
+    return { accessToken: newAccessToken, user: safeUser };
 });
 exports.authServices = {
     registerUser,

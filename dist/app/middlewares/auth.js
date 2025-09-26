@@ -16,7 +16,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const ApiError_1 = __importDefault(require("../../errors/ApiError"));
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const config_1 = __importDefault(require("../../config"));
-const user_model_1 = require("../modules/users/user.model");
+const auth_model_1 = require("../modules/auth/auth.model");
 const auth = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let token = req.headers.authorization;
     if (token === null || token === void 0 ? void 0 : token.startsWith("Bearer "))
@@ -34,12 +34,10 @@ const auth = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, voi
         }
         throw new ApiError_1.default(401, "Authentication failed: Invalid token");
     }
-    const user = yield user_model_1.userModel.findOne({ email: decoded.email });
+    const user = yield auth_model_1.AuthModel.findOne({ email: decoded.email });
     if (!user) {
         throw new ApiError_1.default(404, "Authentication failed: User not found");
     }
-    // console.log(user);
-    // console.log(decoded);
     req.user = user;
     next();
 }));

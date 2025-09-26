@@ -4,7 +4,9 @@ import cors from "cors";
 import router from "./routes";
 import notFound from "./errors/notFound";
 import globalErrorHandler from "./errors/globalErrorhandler";
+import cookieParser from "cookie-parser";
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(
     cors({

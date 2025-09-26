@@ -44,11 +44,6 @@ const registerUser = async (data: RegisterInput) => {
 
     const { password: _, ...userWithoutPassword } = user.toObject();
 
-    console.log(config.jwt_access_secret);
-    console.log(config.jwt_access_expire);
-    console.log(config.jwt_refresh_secret);
-    console.log(config.jwt_refresh_expire);
-
     const accessToken = jwtHelper.generateToken(userWithoutPassword, config.jwt_access_secret as string, config.jwt_access_expire as string);
     const refreshToken = jwtHelper.generateToken(userWithoutPassword, config.jwt_refresh_secret as string, config.jwt_refresh_expire as string);
 
@@ -185,10 +180,10 @@ const refreshTokenService = async (token: string) => {
     const user = await AuthModel.findById(decoded._id);
     if (!user) throw new ApiError(httpStatus.NOT_FOUND, "User not found");
 
-    const { password, ...userWithoutPassword } = user.toObject();
-    const newAccessToken = jwtHelper.generateToken(userWithoutPassword, config.jwt_access_secret as string, config.jwt_access_expire as string);
+    const { password, verificationToken, verificationTokenExpiry, ...safeUser } = user.toObject();
+    const newAccessToken = jwtHelper.generateToken(safeUser, config.jwt_access_secret as string, config.jwt_access_expire as string);
 
-    return { accessToken: newAccessToken, user: userWithoutPassword };
+    return { accessToken: newAccessToken, user: safeUser };
 };
 
 export const authServices = {

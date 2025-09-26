@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import ApiError from "../../errors/ApiError";
 import catchAsync from "../../utils/catchAsync";
 import config from "../../config";
-import { userModel } from "../modules/users/user.model";
+import { AuthModel } from "../modules/auth/auth.model";
 
 const auth = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     let token = req.headers.authorization;
@@ -24,14 +24,11 @@ const auth = catchAsync(async (req: Request, res: Response, next: NextFunction) 
         throw new ApiError(401, "Authentication failed: Invalid token");
     }
 
-    const user = await userModel.findOne({ email: decoded.email });
+    const user = await AuthModel.findOne({ email: decoded.email });
 
     if (!user) {
         throw new ApiError(404, "Authentication failed: User not found");
     }
-
-    // console.log(user);
-    // console.log(decoded);
 
     req.user = user;
     next();
