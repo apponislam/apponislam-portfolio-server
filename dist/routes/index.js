@@ -9,8 +9,13 @@ const skills_route_1 = require("../app/modules/skills/skills.route");
 const blog_route_1 = require("../app/modules/blogs/blog.route");
 const project_route_1 = require("../app/modules/projects/project.route");
 const message_route_1 = require("../app/modules/messages/message.route");
+const auth_routes_1 = require("../app/modules/auth/auth.routes");
 const router = express_1.default.Router();
 const moduleRoutes = [
+    {
+        path: "/auth",
+        route: auth_routes_1.authRoutes,
+    },
     {
         path: "/users",
         route: user_route_1.userRoute,

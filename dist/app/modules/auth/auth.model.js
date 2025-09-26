@@ -16,7 +16,12 @@ const AuthSchema = new mongoose_1.Schema({
         },
         default: null,
     },
-    provider: { type: String, enum: ["Google", "GitHub", "Email"], required: [true, "Provider is required"] },
+    provider: {
+        type: String,
+        enum: ["Google", "GitHub", "Email"],
+        required: [true, "Provider is required"],
+        default: "Email",
+    },
     role: {
         type: String,
         enum: Object.values(auth_interface_1.UserRole),
@@ -28,5 +33,14 @@ const AuthSchema = new mongoose_1.Schema({
     deletedAt: { type: Date },
     deletedBy: { type: mongoose_1.Schema.Types.ObjectId, ref: "Auth" },
     deletedReason: { type: String },
-}, { timestamps: true });
+    // Email verification fields
+    verificationToken: { type: String },
+    verificationTokenExpiry: { type: Date },
+    // Password reset fields
+    resetPasswordOtp: { type: String },
+    resetPasswordOtpExpiry: { type: Date },
+}, {
+    timestamps: true,
+    versionKey: false,
+});
 exports.AuthModel = (0, mongoose_1.model)("Auth", AuthSchema);

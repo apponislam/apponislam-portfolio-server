@@ -18,6 +18,13 @@ export interface IAuth {
     deletedAt?: Date;
     deletedBy?: string;
     deletedReason?: string;
+
+    // New fields for email verification & password reset
+    verificationToken?: string;
+    verificationTokenExpiry?: Date;
+    resetPasswordOtp?: string;
+    resetPasswordOtpExpiry?: Date;
+
     createdAt?: Date;
     updatedAt?: Date;
 }

@@ -15,7 +15,12 @@ const AuthSchema = new Schema<IAuth>(
             },
             default: null,
         },
-        provider: { type: String, enum: ["Google", "GitHub", "Email"], required: [true, "Provider is required"] },
+        provider: {
+            type: String,
+            enum: ["Google", "GitHub", "Email"],
+            required: [true, "Provider is required"],
+            default: "Email",
+        },
         role: {
             type: String,
             enum: Object.values(UserRole),
@@ -27,8 +32,19 @@ const AuthSchema = new Schema<IAuth>(
         deletedAt: { type: Date },
         deletedBy: { type: Schema.Types.ObjectId, ref: "Auth" },
         deletedReason: { type: String },
+
+        // Email verification fields
+        verificationToken: { type: String },
+        verificationTokenExpiry: { type: Date },
+
+        // Password reset fields
+        resetPasswordOtp: { type: String },
+        resetPasswordOtpExpiry: { type: Date },
     },
-    { timestamps: true }
+    {
+        timestamps: true,
+        versionKey: false,
+    }
 );
 
 export const AuthModel = model<IAuth>("Auth", AuthSchema);
