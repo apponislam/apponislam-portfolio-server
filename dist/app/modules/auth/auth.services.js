@@ -53,7 +53,7 @@ const registerUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
         subject: "Verify Your Email Address",
         html: (0, verificationEmail_1.generateVerificationEmailTemplate)(user.fullName, verificationUrl),
     });
-    const _a = user.toObject(), { password: _ } = _a, userWithoutPassword = __rest(_a, ["password"]);
+    const _a = user.toObject(), { password: _, verificationToken, verificationTokenExpiry } = _a, userWithoutPassword = __rest(_a, ["password", "verificationToken", "verificationTokenExpiry"]);
     const accessToken = jwtHelper_1.jwtHelper.generateToken(userWithoutPassword, config_1.default.jwt_access_secret, config_1.default.jwt_access_expire);
     const refreshToken = jwtHelper_1.jwtHelper.generateToken(userWithoutPassword, config_1.default.jwt_refresh_secret, config_1.default.jwt_refresh_expire);
     return { user: userWithoutPassword, accessToken, refreshToken };
@@ -99,7 +99,7 @@ const loginUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const isMatch = yield bcrypt_1.default.compare(data.password, user.password);
     if (!isMatch)
         throw new ApiError_1.default(http_status_1.default.UNAUTHORIZED, "Invalid credentials");
-    const _a = user.toObject(), { password } = _a, userWithoutPassword = __rest(_a, ["password"]);
+    const _a = user.toObject(), { password, verificationToken, verificationTokenExpiry } = _a, userWithoutPassword = __rest(_a, ["password", "verificationToken", "verificationTokenExpiry"]);
     const accessToken = jwtHelper_1.jwtHelper.generateToken(userWithoutPassword, config_1.default.jwt_access_secret, config_1.default.jwt_access_expire);
     const refreshToken = jwtHelper_1.jwtHelper.generateToken(userWithoutPassword, config_1.default.jwt_refresh_secret, config_1.default.jwt_refresh_expire);
     return { user: userWithoutPassword, accessToken, refreshToken };

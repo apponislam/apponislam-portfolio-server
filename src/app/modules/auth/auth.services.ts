@@ -42,7 +42,7 @@ const registerUser = async (data: RegisterInput) => {
         html: generateVerificationEmailTemplate(user.fullName, verificationUrl),
     });
 
-    const { password: _, ...userWithoutPassword } = user.toObject();
+    const { password: _, verificationToken, verificationTokenExpiry, ...userWithoutPassword } = user.toObject();
 
     const accessToken = jwtHelper.generateToken(userWithoutPassword, config.jwt_access_secret as string, config.jwt_access_expire as string);
     const refreshToken = jwtHelper.generateToken(userWithoutPassword, config.jwt_refresh_secret as string, config.jwt_refresh_expire as string);
@@ -93,7 +93,7 @@ const loginUser = async (data: LoginInput) => {
     const isMatch = await bcrypt.compare(data.password, user.password!);
     if (!isMatch) throw new ApiError(httpStatus.UNAUTHORIZED, "Invalid credentials");
 
-    const { password, ...userWithoutPassword } = user.toObject();
+    const { password, verificationToken, verificationTokenExpiry, ...userWithoutPassword } = user.toObject();
 
     const accessToken = jwtHelper.generateToken(userWithoutPassword, config.jwt_access_secret as string, config.jwt_access_expire as string);
     const refreshToken = jwtHelper.generateToken(userWithoutPassword, config.jwt_refresh_secret as string, config.jwt_refresh_expire as string);
