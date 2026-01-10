@@ -19,7 +19,7 @@ export interface IProjectsInterface {
     shortDescription: string;
     websiteLink?: string;
     githubLink?: string;
-    techStack: ("Next.js" | "React" | "GraphQL" | "express.js" | "Node.js" | "MongoDB" | "Firebase" | "Typescript" | "Javascript" | "HTML 5" | "CSS 3" | "React Native" | "Angular" | "Redux" | "Material UI" | "Tailwind CSS" | "Bootstrap" | "Google Auth" | "MySQL")[];
+    techStack: ("Next.js" | "React" | "GraphQL" | "Express.js" | "Node.js" | "MongoDB" | "Firebase" | "Typescript" | "Javascript" | "HTML 5" | "CSS 3" | "React Native" | "Angular" | "Redux" | "Material UI" | "Tailwind CSS" | "Bootstrap" | "Google Auth" | "MySQL" | "JWT" | "TanStack Query" | "react-hook-form" | "SurjoPay" | "Prisma" | "PostgreSQL")[];
     startDate: Date;
     endDate: Date;
     companyLogoImg: string;
