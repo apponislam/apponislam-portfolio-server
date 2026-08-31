@@ -18,7 +18,7 @@ const trackVisit = catchAsync(async (req: Request, res: Response) => {
 
     if (["WEB", "ANDROID", "IOS", "APP"].includes(reqPlatform)) {
         platform = reqPlatform as VisitorPlatform;
-    } else if (userAgent.includes("okhttp") || userAgent.includes("CFNetwork") || userAgent.includes("Dalvik") || userAgent.includes("BazarHisabApp")) {
+    } else if (userAgent.includes("okhttp") || userAgent.includes("CFNetwork") || userAgent.includes("Dalvik") || userAgent.includes("ApponIslamPortfolioApp")) {
         platform = "APP";
     }
 

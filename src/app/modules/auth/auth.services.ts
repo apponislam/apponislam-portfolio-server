@@ -54,7 +54,7 @@ const registerUser = async (data: any) => {
     const { password: pwd, verificationToken: vToken, verificationExpiry: vExpiry, verificationCode: vCode, ...userWithoutSensitive } = userObject;
 
     // Log activity in the background
-    activityServices.logActivity(createdUser._id.toString(), ActivityType.REGISTER, `Registered a new account with email ${createdUser.email}`, undefined, { userId: createdUser._id });
+    activityServices.logActivity(createdUser._id.toString(), ActivityType.REGISTER, `Registered a new account with email ${createdUser.email}`, { userId: createdUser._id });
 
     return { user: userWithoutSensitive, accessToken, refreshToken };
 };
@@ -90,7 +90,7 @@ const loginUser = async (data: { email: string; password: string }) => {
     const { password, ...userWithoutPassword } = user.toObject();
 
     // Log activity in the background
-    activityServices.logActivity(user._id.toString(), ActivityType.LOGIN, `Logged into the application`, undefined, { userId: user._id });
+    activityServices.logActivity(user._id.toString(), ActivityType.LOGIN, `Logged into the application`, { userId: user._id });
 
     return { user: userWithoutPassword, accessToken, refreshToken };
 };
@@ -126,7 +126,7 @@ const verifyEmail = async (email: string, token?: string, otp?: string) => {
     await user.save();
 
     // Log activity in the background
-    activityServices.logActivity(user._id.toString(), ActivityType.EMAIL_VERIFY, `Verified email address successfully`, undefined, { userId: user._id });
+    activityServices.logActivity(user._id.toString(), ActivityType.EMAIL_VERIFY, `Verified email address successfully`, { userId: user._id });
 
     return { message: "Email verified successfully" };
 };
@@ -275,7 +275,7 @@ const resetPassword = async (token: string, newPassword: string) => {
     await user.save();
 
     // Log activity in the background
-    activityServices.logActivity(user._id.toString(), ActivityType.PASSWORD_RESET, `Reset password using password recovery link`, undefined, { userId: user._id });
+    activityServices.logActivity(user._id.toString(), ActivityType.PASSWORD_RESET, `Reset password using password recovery link`, { userId: user._id });
 };
 
 const updateProfile = async (userId: string, data: any) => {
@@ -284,7 +284,7 @@ const updateProfile = async (userId: string, data: any) => {
     if (!user) throw new ApiError(httpStatus.NOT_FOUND, "User not registered");
 
     // Log activity in the background
-    activityServices.logActivity(userId, ActivityType.PROFILE_UPDATE, `Updated profile information`, undefined, { userId: user._id });
+    activityServices.logActivity(userId, ActivityType.PROFILE_UPDATE, `Updated profile information`, { userId: user._id });
 
     return user;
 };
@@ -301,7 +301,7 @@ const changePassword = async (userId: string, currentPassword: string, newPasswo
     await user.save();
 
     // Log activity in the background
-    activityServices.logActivity(userId, ActivityType.PASSWORD_CHANGE, `Changed profile password`, undefined, { userId: user._id });
+    activityServices.logActivity(userId, ActivityType.PASSWORD_CHANGE, `Changed profile password`, { userId: user._id });
 };
 
 const updateEmail = async (userId: string, newEmail: string, password: string) => {
@@ -373,7 +373,7 @@ const verifyNewEmail = async (token: string, email: string) => {
     await user.save();
 
     // Log activity in the background
-    activityServices.logActivity(user._id.toString(), ActivityType.EMAIL_UPDATE, `Updated account email to ${email}`, undefined, { userId: user._id });
+    activityServices.logActivity(user._id.toString(), ActivityType.EMAIL_UPDATE, `Updated account email to ${email}`, { userId: user._id });
 
     return { message: "New email verified successfully" };
 };
@@ -395,7 +395,7 @@ const deleteUser = async (userId: string) => {
     if (!user) throw new ApiError(httpStatus.NOT_FOUND, "User not found");
 
     // Log activity in the background
-    activityServices.logActivity(userId, ActivityType.USER_DELETE, `Deleted user account (soft delete)`, undefined, { userId: user._id });
+    activityServices.logActivity(userId, ActivityType.USER_DELETE, `Deleted user account (soft delete)`, { userId: user._id });
 
     return user;
 };

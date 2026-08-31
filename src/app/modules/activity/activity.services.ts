@@ -7,11 +7,7 @@ import { ActivityType } from "./activity.interface";
 export const ACTIVITY_CATEGORIES: Record<string, ActivityType[]> = {
     AUTH: [ActivityType.REGISTER, ActivityType.LOGIN, ActivityType.EMAIL_VERIFY, ActivityType.PASSWORD_RESET, ActivityType.PROFILE_UPDATE, ActivityType.PASSWORD_CHANGE, ActivityType.EMAIL_UPDATE, ActivityType.USER_DELETE],
     USER: [ActivityType.REGISTER, ActivityType.LOGIN, ActivityType.EMAIL_VERIFY, ActivityType.PASSWORD_RESET, ActivityType.PROFILE_UPDATE, ActivityType.PASSWORD_CHANGE, ActivityType.EMAIL_UPDATE, ActivityType.USER_DELETE],
-    PRODUCT: [ActivityType.CREATE_PRODUCT, ActivityType.UPDATE_PRODUCT, ActivityType.DELETE_PRODUCT, ActivityType.MERGE_PRODUCTS],
-    BAZAR: [ActivityType.CREATE_BAZAR_ENTRY, ActivityType.UPDATE_BAZAR_ENTRY, ActivityType.DELETE_BAZAR_ENTRY],
-    BAZAR_ENTRY: [ActivityType.CREATE_BAZAR_ENTRY, ActivityType.UPDATE_BAZAR_ENTRY, ActivityType.DELETE_BAZAR_ENTRY],
-    GROUP: [ActivityType.CREATE_GROUP, ActivityType.JOIN_GROUP, ActivityType.LEAVE_GROUP, ActivityType.UPDATE_GROUP],
-    BILL: [ActivityType.CREATE_BILL, ActivityType.UPDATE_BILL, ActivityType.DELETE_BILL],
+    CONTACT: [ActivityType.CONTACT_SUBMIT, ActivityType.CONTACT_REPLY],
 };
 
 export const parseActionOrTypeFilter = (input?: ActivityType | ActivityType[] | string): any => {
@@ -62,7 +58,7 @@ export const parseActionOrTypeFilter = (input?: ActivityType | ActivityType[] | 
     return { $in: typesArray };
 };
 
-const logActivity = (userId: any, action: ActivityType, details: string, groupId?: string, metadata?: Record<string, any>) => {
+const logActivity = (userId: any, action: ActivityType, details: string, metadata?: Record<string, any>) => {
     // Fire and forget: don't await model creation, handle errors internally
     try {
         if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -76,9 +72,6 @@ const logActivity = (userId: any, action: ActivityType, details: string, groupId
             details,
         };
 
-        if (groupId && mongoose.Types.ObjectId.isValid(groupId)) {
-            activityData.group = new mongoose.Types.ObjectId(groupId);
-        }
         if (metadata) {
             activityData.metadata = metadata;
         }
@@ -98,22 +91,17 @@ export interface GetActivitiesQuery {
     action?: ActivityType | ActivityType[] | string;
     type?: string;
     userId?: string;
-    groupId?: string;
     startDate?: string;
     endDate?: string;
 }
 
 const getAllActivities = async (query: GetActivitiesQuery) => {
-    const { page = 1, limit = 20, action, type, userId, groupId, startDate, endDate } = query;
+    const { page = 1, limit = 20, action, type, userId, startDate, endDate } = query;
 
     const filter: any = { isDeleted: false };
 
     if (userId && mongoose.Types.ObjectId.isValid(userId)) {
         filter.user = new mongoose.Types.ObjectId(userId);
-    }
-
-    if (groupId && mongoose.Types.ObjectId.isValid(groupId)) {
-        filter.group = new mongoose.Types.ObjectId(groupId);
     }
 
     if (startDate || endDate) {
@@ -131,7 +119,7 @@ const getAllActivities = async (query: GetActivitiesQuery) => {
     }
 
     const skip = (Number(page) - 1) * Number(limit);
-    const activities = await ActivityModel.find(filter).populate("user", "name email phone profileImage").populate("group", "name creator").sort({ createdAt: -1 }).skip(skip).limit(Number(limit));
+    const activities = await ActivityModel.find(filter).populate("user", "name email phone profileImage").sort({ createdAt: -1 }).skip(skip).limit(Number(limit));
 
     const total = await ActivityModel.countDocuments(filter);
 
@@ -164,28 +152,25 @@ export interface ClearActivitiesParams {
     action?: ActivityType | ActivityType[] | string;
     type?: string;
     userId?: string;
-    groupId?: string;
     clearAll?: boolean;
 }
 
-const clearActivities = async (optionsOrStartDate?: ClearActivitiesParams | string, endDateParam?: string, actionParam?: ActivityType | ActivityType[] | string, typeParam?: string, userIdParam?: string, groupIdParam?: string) => {
+const clearActivities = async (optionsOrStartDate?: ClearActivitiesParams | string, endDateParam?: string, actionParam?: ActivityType | ActivityType[] | string, typeParam?: string, userIdParam?: string) => {
     let startDate: string | undefined;
     let endDate: string | undefined;
     let action: ActivityType | ActivityType[] | string | undefined;
     let type: string | undefined;
     let userId: string | undefined;
-    let groupId: string | undefined;
     let clearAll: boolean | undefined;
 
     if (typeof optionsOrStartDate === "object" && optionsOrStartDate !== null) {
-        ({ startDate, endDate, action, type, userId, groupId, clearAll } = optionsOrStartDate);
+        ({ startDate, endDate, action, type, userId, clearAll } = optionsOrStartDate);
     } else {
         startDate = optionsOrStartDate;
         endDate = endDateParam;
         action = actionParam;
         type = typeParam;
         userId = userIdParam;
-        groupId = groupIdParam;
     }
 
     const targetActionOrType = action || type;
@@ -197,13 +182,6 @@ const clearActivities = async (optionsOrStartDate?: ClearActivitiesParams | stri
             throw new ApiError(httpStatus.BAD_REQUEST, "Invalid userId specified");
         }
         filter.user = new mongoose.Types.ObjectId(userId);
-    }
-
-    if (groupId) {
-        if (!mongoose.Types.ObjectId.isValid(groupId)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, "Invalid groupId specified");
-        }
-        filter.group = new mongoose.Types.ObjectId(groupId);
     }
 
     if (startDate || endDate) {
@@ -235,7 +213,6 @@ const clearActivities = async (optionsOrStartDate?: ClearActivitiesParams | stri
     }
 
     if (userId) detailsMsg.push(`for user "${userId}"`);
-    if (groupId) detailsMsg.push(`for group "${groupId}"`);
 
     const filterDetail = detailsMsg.length > 0 ? ` (${detailsMsg.join(", ")})` : "";
 

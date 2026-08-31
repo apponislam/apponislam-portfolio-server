@@ -8,10 +8,6 @@ const activitySchema = new Schema<Activity>(
             ref: "User",
             required: [true, "User ID is required"],
         },
-        group: {
-            type: Schema.Types.ObjectId,
-            ref: "Group",
-        },
         action: {
             type: String,
             enum: Object.values(ActivityType),
@@ -35,8 +31,7 @@ const activitySchema = new Schema<Activity>(
     }
 );
 
-// Compound indexes for optimal sorting/querying
-activitySchema.index({ group: 1, isDeleted: 1, createdAt: -1 });
+// Compound index for optimal sorting/querying
 activitySchema.index({ user: 1, isDeleted: 1, createdAt: -1 });
 
 export const ActivityModel = mongoose.model<Activity>("Activity", activitySchema);
