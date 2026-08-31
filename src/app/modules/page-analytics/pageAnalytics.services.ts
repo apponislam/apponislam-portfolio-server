@@ -27,13 +27,20 @@ const trackPageView = async (payload: {
         updateDoc.$set.userId = new mongoose.Types.ObjectId(userId);
     }
 
-    const record = await PageAnalyticsModel.findOneAndUpdate(
-        { date: dateStr, path: cleanPath, ipAddress },
-        updateDoc,
-        { upsert: true, returnDocument: "after", setDefaultsOnInsert: true, runValidators: false }
-    );
+    // Fire and forget in background so API responds in <10ms
+    setImmediate(async () => {
+        try {
+            await PageAnalyticsModel.findOneAndUpdate(
+                { date: dateStr, path: cleanPath, ipAddress },
+                updateDoc,
+                { upsert: true, setDefaultsOnInsert: true, runValidators: false }
+            );
+        } catch (err) {
+            console.error("Page view tracking error:", err);
+        }
+    });
 
-    return record;
+    return { recorded: true };
 };
 
 const getPageAnalyticsStats = async (days = 30) => {
@@ -146,13 +153,15 @@ const getAllPageLogs = async (query: {
 
     const skip = (Number(page) - 1) * Number(limit);
 
-    const logs = await PageAnalyticsModel.find(filter)
-        .populate("userId", "name email phone profileImage")
-        .sort({ lastVisitedAt: -1 })
-        .skip(skip)
-        .limit(Number(limit));
-
-    const total = await PageAnalyticsModel.countDocuments(filter);
+    const [logs, total] = await Promise.all([
+        PageAnalyticsModel.find(filter)
+            .populate("userId", "name email phone profileImage")
+            .sort({ lastVisitedAt: -1 })
+            .skip(skip)
+            .limit(Number(limit))
+            .lean(),
+        PageAnalyticsModel.countDocuments(filter),
+    ]);
 
     return {
         meta: {

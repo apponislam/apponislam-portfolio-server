@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 import fs from "fs";
+import compression from "compression";
 import morgan from "morgan";
 import notFound from "./errors/notFound";
 import globalErrorHandler from "./errors/globalErrorhandler";
@@ -18,6 +19,7 @@ const corsOptions = {
     credentials: true,
 };
 
+app.use(compression());
 app.use(morgan("dev"));
 app.use(cors(corsOptions));
 

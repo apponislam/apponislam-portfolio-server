@@ -12,7 +12,12 @@ dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 async function main() {
     try {
-        await mongoose.connect(config.mongodb_url as string);
+        await mongoose.connect(config.mongodb_url as string, {
+            maxPoolSize: 20,
+            minPoolSize: 5,
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
+        });
         server = http.createServer(app);
 
         seedAdmin();

@@ -47,12 +47,15 @@ const getAllContacts = async (query: Record<string, any>) => {
     }
 
     const skip = (Number(page) - 1) * Number(limit);
-    const contacts = await ContactModel.find(filter)
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(Number(limit));
 
-    const total = await ContactModel.countDocuments(filter);
+    const [contacts, total] = await Promise.all([
+        ContactModel.find(filter)
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(Number(limit))
+            .lean(),
+        ContactModel.countDocuments(filter),
+    ]);
 
     return {
         meta: {
