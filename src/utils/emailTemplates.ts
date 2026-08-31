@@ -1,4 +1,3 @@
-import { sendNodemailerMail } from "./nodemailer";
 import { sendEmailWithResend } from "./resend";
 import config from "../app/config";
 
@@ -12,16 +11,12 @@ import {
 } from "./contactEmailTemplates";
 
 /**
- * Dispatch mail via RESEND or Nodemailer based on environment config
+ * Dispatch mail via RESEND
  */
 export const sendMail = (to: string | string[], subject: string, html: string, from?: string) => {
-    if (config.mail.driver === "RESEND") {
-        sendEmailWithResend({ to, subject, html, from }).catch((error) => {
-            console.error("Resend Email error:", error);
-        });
-    } else {
-        sendNodemailerMail(to, subject, html, from);
-    }
+    sendEmailWithResend({ to, subject, html, from }).catch((error) => {
+        console.error("Resend Email error:", error);
+    });
 };
 
 export const sendContactNotificationEmail = (to: string | string[], data: ContactEmailProps) => {

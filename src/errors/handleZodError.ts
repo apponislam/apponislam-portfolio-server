@@ -6,7 +6,7 @@ const handleZodError = (err: ZodError): TGenericErrorResponse => {
         const lastPath = issue.path[issue.path.length - 1];
 
         return {
-            path: typeof lastPath === "symbol" ? lastPath.toString() : String(lastPath),
+            path: lastPath !== undefined ? String(lastPath) : "",
             message: issue.message,
         };
     });

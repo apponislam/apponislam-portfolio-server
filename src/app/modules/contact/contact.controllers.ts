@@ -35,7 +35,7 @@ const getAllContacts = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getSingleContact = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const result = await contactServices.getSingleContact(id);
 
     sendResponse(res, {
@@ -47,7 +47,7 @@ const getSingleContact = catchAsync(async (req: Request, res: Response) => {
 });
 
 const replyContact = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const { replyMessage } = req.body;
 
     const result = await contactServices.replyContact(id, replyMessage);
@@ -61,7 +61,7 @@ const replyContact = catchAsync(async (req: Request, res: Response) => {
 });
 
 const updateContactStatus = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const { status, adminNotes } = req.body;
 
     const result = await contactServices.updateContactStatus(id, status, adminNotes);
@@ -75,7 +75,7 @@ const updateContactStatus = catchAsync(async (req: Request, res: Response) => {
 });
 
 const deleteContact = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const result = await contactServices.deleteContact(id);
 
     sendResponse(res, {
