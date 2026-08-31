@@ -1,14 +1,11 @@
 import { Types } from "mongoose";
 
-export type VisitorPlatform = "WEB" | "ANDROID" | "IOS" | "APP";
-
-export interface IVisitor {
+export interface IPageAnalytics {
     _id?: Types.ObjectId;
+    path: string;
     ipAddress: string;
     userId?: Types.ObjectId;
     userAgent?: string;
-    platform: VisitorPlatform;
-    path?: string;
     date: string;
     count: number;
     lastVisitedAt: Date;

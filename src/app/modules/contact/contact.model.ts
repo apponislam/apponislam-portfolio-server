@@ -57,7 +57,11 @@ const contactSchema = new Schema<IContact>(
     }
 );
 
+// Comprehensive indexes for admin filtering, search queries, and analytics
 contactSchema.index({ status: 1, createdAt: -1 });
-contactSchema.index({ email: 1 });
+contactSchema.index({ createdAt: -1 });
+contactSchema.index({ email: 1, createdAt: -1 });
+contactSchema.index({ name: "text", email: "text", message: "text" });
+contactSchema.index({ ipAddress: 1 });
 
 export const ContactModel = model<IContact>("Contact", contactSchema);

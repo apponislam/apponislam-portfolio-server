@@ -1,8 +1,15 @@
 import mongoose, { Schema } from "mongoose";
-import { IVisitor } from "./visitor.interface";
+import { IPageAnalytics } from "./pageAnalytics.interface";
 
-const visitorSchema = new Schema<IVisitor>(
+const pageAnalyticsSchema = new Schema<IPageAnalytics>(
     {
+        path: {
+            type: String,
+            required: true,
+            default: "/",
+            trim: true,
+            index: true,
+        },
         ipAddress: {
             type: String,
             required: true,
@@ -15,15 +22,6 @@ const visitorSchema = new Schema<IVisitor>(
         userAgent: {
             type: String,
             default: "",
-        },
-        platform: {
-            type: String,
-            enum: ["WEB", "ANDROID", "IOS", "APP"],
-            default: "WEB",
-        },
-        path: {
-            type: String,
-            default: "/",
         },
         date: {
             type: String,
@@ -45,9 +43,7 @@ const visitorSchema = new Schema<IVisitor>(
     }
 );
 
-// Compound index to quickly find/upsert daily visits by IP, Date & Platform
-visitorSchema.index({ date: 1, ipAddress: 1, platform: 1 }, { unique: true });
-// visitorSchema.index({ date: 1 });
-visitorSchema.index({ platform: 1 });
+// Compound unique index by Date + Path + IP to accurately track views per page per IP daily
+pageAnalyticsSchema.index({ date: 1, path: 1, ipAddress: 1 }, { unique: true });
 
-export const VisitorModel = mongoose.model<IVisitor>("Visitor", visitorSchema);
+export const PageAnalyticsModel = mongoose.model<IPageAnalytics>("PageAnalytics", pageAnalyticsSchema);

@@ -1,5 +1,3 @@
-import { Types } from "mongoose";
-
 export type UserRole = "ADMIN" | "USER";
 
 export interface User {
