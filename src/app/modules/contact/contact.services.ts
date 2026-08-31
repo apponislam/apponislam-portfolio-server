@@ -63,6 +63,8 @@ const getAllContacts = async (query: Record<string, any>) => {
             limit: Number(limit),
             total,
             totalPages: Math.ceil(total / Number(limit)),
+            hasNext: Number(page) * Number(limit) < total,
+            hasPrev: Number(page) > 1,
         },
         data: contacts,
     };
