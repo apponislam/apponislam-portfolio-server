@@ -16,7 +16,7 @@ const routes_1 = __importDefault(require("./app/routes"));
 const config_1 = __importDefault(require("./app/config"));
 const app = (0, express_1.default)();
 const corsOptions = {
-    origin: ["http://localhost:3000", "http://localhost:3001", "https://apponislam.top", "http://www.apponislam.top", "https://apponislam.com", "http://www.apponislam.com"],
+    origin: ["http://localhost:3000", "http://localhost:3001", "https://apponislam.top", "https://www.apponislam.top", "https://apponislam.com", "https://www.apponislam.com", "http://apponislam.com", "http://www.apponislam.com"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,

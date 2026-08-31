@@ -190,7 +190,7 @@ const requestPasswordReset = (email) => __awaiter(void 0, void 0, void 0, functi
     user.resetPasswordOtpExpiry = otpExpiry;
     yield user.save();
     // Send OTP email
-    (0, emailTemplates_1.sendOtpEmail)(email, otp, user.name);
+    (0, emailTemplates_1.sendOtpEmail)(email, user.name || "User", otp);
     return { message: "OTP sent" };
 });
 const verifyOtp = (email, otp) => __awaiter(void 0, void 0, void 0, function* () {
@@ -227,7 +227,7 @@ const resendOtp = (email) => __awaiter(void 0, void 0, void 0, function* () {
     user.resetPasswordOtpExpiry = otpExpiry;
     yield user.save();
     // Send email
-    (0, emailTemplates_1.sendOtpEmail)(email, otp, user.name);
+    (0, emailTemplates_1.sendOtpEmail)(email, user.name || "User", otp);
     return { message: "OTP resent" };
 });
 const resetPassword = (token, newPassword) => __awaiter(void 0, void 0, void 0, function* () {

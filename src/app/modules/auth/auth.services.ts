@@ -203,7 +203,7 @@ const requestPasswordReset = async (email: string) => {
     await user.save();
 
     // Send OTP email
-    sendOtpEmail(email, otp, user.name as string);
+    sendOtpEmail(email, user.name as string || "User", otp);
 
     return { message: "OTP sent" };
 };
@@ -251,7 +251,7 @@ const resendOtp = async (email: string) => {
     await user.save();
 
     // Send email
-    sendOtpEmail(email, otp, user.name as string);
+    sendOtpEmail(email, user.name as string || "User", otp);
 
     return { message: "OTP resent" };
 };
