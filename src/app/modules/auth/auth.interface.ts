@@ -22,7 +22,6 @@ export interface User {
     isEmailVerified: boolean;
     isDeleted: boolean;
     lastLogin?: Date;
-    groupId?: Types.ObjectId;
 
     // Password reset fields
     resetPasswordOtp?: string;
