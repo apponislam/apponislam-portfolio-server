@@ -8,7 +8,12 @@ import { seedAdmin } from "./app/modules/auth/auth.seed";
 
 let server: Server;
 
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+// Only set custom DNS if needed locally
+try {
+    dns.setServers(["8.8.8.8", "8.8.4.4"]);
+} catch (e) {
+    // Ignore DNS override errors on cloud hosts like Vercel
+}
 
 async function main() {
     try {
@@ -62,3 +67,5 @@ process.on("SIGTERM", () => shutdown(undefined, 0, "SIGTERM"));
 process.on("warning", (warning) => {
     console.warn("⚠️ Node.js Warning:", warning.name, warning.message, warning.stack);
 });
+
+export default app;
