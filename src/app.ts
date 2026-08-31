@@ -1,28 +1,51 @@
 import express, { Application, Request, Response } from "express";
-const app: Application = express();
 import cors from "cors";
-import { userRoute } from "./app/modules/users/user.route";
-import { messageRoute } from "./app/modules/messages/message.route";
-import { projectRoute } from "./app/modules/projects/project.route";
-import { blogRoute } from "./app/modules/blogs/blog.route";
-import { skillRoutes } from "./app/modules/skills/skills.route";
+import cookieParser from "cookie-parser";
+import path from "path";
+import fs from "fs";
+import morgan from "morgan";
+import notFound from "./errors/notFound";
+import globalErrorHandler from "./errors/globalErrorhandler";
+import router from "./app/routes";
+import config from "./app/config";
+
+const app: Application = express();
+
+const corsOptions = {
+    origin: ["http://localhost:3000", "http://localhost:3001", "https://apponislam.top", "http://www.apponislam.top", "https://apponislam.com", "http://www.apponislam.com"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+};
+
+app.use(morgan("dev"));
+app.use(cors(corsOptions));
 
 app.use(express.json());
-app.use(
-    cors({
-        origin: ["http://localhost:3000", "https://apponislam-portfolio-with-next-js.vercel.app", "https://apponislam.4ppon.com"],
-        credentials: true,
-    })
-);
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "../public"), { index: false }));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World!");
+    const indexPath = path.join(__dirname, "../public/index.html");
+    fs.readFile(indexPath, "utf8", (err, html) => {
+        if (err) {
+            return res.status(500).send("Error loading status page");
+        }
+        const env = config.node_env || "production";
+        const port = config.port || "5000";
+        const formattedEnv = env.charAt(0).toUpperCase() + env.slice(1).toLowerCase();
+
+        const modifiedHtml = html.replace("{{NODE_ENV}}", formattedEnv).replace("{{PORT}}", String(port));
+
+        res.send(modifiedHtml);
+    });
 });
 
-app.use("/api/v1/users", userRoute);
-app.use("/api/v1/messages", messageRoute);
-app.use("/api/v1/project", projectRoute);
-app.use("/api/v1/blog", blogRoute);
-app.use("/api/v1/skills", skillRoutes);
+app.use("/api/v1", router);
+
+app.use(notFound);
+app.use(globalErrorHandler);
 
 export default app;
