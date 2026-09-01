@@ -53,7 +53,13 @@ const getPageAnalyticsStats = async (days = 30) => {
             $group: {
                 _id: null,
                 totalPageViews: { $sum: "$count" },
-                uniqueVisitors: { $sum: 1 },
+                uniqueIPs: { $addToSet: "$ipAddress" },
+            },
+        },
+        {
+            $project: {
+                totalPageViews: 1,
+                uniqueVisitors: { $size: "$uniqueIPs" },
             },
         },
     ]);
@@ -67,13 +73,22 @@ const getPageAnalyticsStats = async (days = 30) => {
             $group: {
                 _id: null,
                 totalPageViews: { $sum: "$count" },
-                uniqueVisitorRecords: { $sum: 1 },
+                uniqueIPs: { $addToSet: "$ipAddress" },
+            },
+        },
+        {
+            $project: {
+                totalPageViews: 1,
+                uniqueVisitors: { $size: "$uniqueIPs" },
             },
         },
     ]);
 
     const totalPageViews = allTimeStats[0]?.totalPageViews || 0;
-    const totalUniqueVisitors = allTimeStats[0]?.uniqueVisitorRecords || 0;
+    const totalUniqueVisitors = allTimeStats[0]?.uniqueVisitors || 0;
+
+    // Top pages summary for stats overview
+    const topPages = await getTopPages(5);
 
     // Daily trend for past N days
     const startDate = new Date();
@@ -86,7 +101,14 @@ const getPageAnalyticsStats = async (days = 30) => {
             $group: {
                 _id: "$date",
                 totalPageViews: { $sum: "$count" },
-                uniqueVisitors: { $sum: 1 },
+                uniqueIPs: { $addToSet: "$ipAddress" },
+            },
+        },
+        {
+            $project: {
+                _id: 1,
+                totalPageViews: 1,
+                uniqueVisitors: { $size: "$uniqueIPs" },
             },
         },
         { $sort: { _id: 1 } },
@@ -103,6 +125,7 @@ const getPageAnalyticsStats = async (days = 30) => {
         todayUniqueVisitors,
         totalPageViews,
         totalUniqueVisitors,
+        topPages,
         dailyTrend,
     };
 };
@@ -113,7 +136,7 @@ const getTopPages = async (limit = 10) => {
             $group: {
                 _id: "$path",
                 totalViews: { $sum: "$count" },
-                uniqueVisitors: { $sum: 1 },
+                uniqueIPs: { $addToSet: "$ipAddress" },
             },
         },
         { $sort: { totalViews: -1 } },
@@ -123,7 +146,7 @@ const getTopPages = async (limit = 10) => {
                 _id: 0,
                 path: "$_id",
                 totalViews: 1,
-                uniqueVisitors: 1,
+                uniqueVisitors: { $size: "$uniqueIPs" },
             },
         },
     ]);

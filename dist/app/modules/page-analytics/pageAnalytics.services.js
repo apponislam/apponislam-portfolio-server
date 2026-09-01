@@ -53,7 +53,13 @@ const getPageAnalyticsStats = (...args_1) => __awaiter(void 0, [...args_1], void
             $group: {
                 _id: null,
                 totalPageViews: { $sum: "$count" },
-                uniqueVisitors: { $sum: 1 },
+                uniqueIPs: { $addToSet: "$ipAddress" },
+            },
+        },
+        {
+            $project: {
+                totalPageViews: 1,
+                uniqueVisitors: { $size: "$uniqueIPs" },
             },
         },
     ]);
@@ -65,12 +71,20 @@ const getPageAnalyticsStats = (...args_1) => __awaiter(void 0, [...args_1], void
             $group: {
                 _id: null,
                 totalPageViews: { $sum: "$count" },
-                uniqueVisitorRecords: { $sum: 1 },
+                uniqueIPs: { $addToSet: "$ipAddress" },
+            },
+        },
+        {
+            $project: {
+                totalPageViews: 1,
+                uniqueVisitors: { $size: "$uniqueIPs" },
             },
         },
     ]);
     const totalPageViews = ((_c = allTimeStats[0]) === null || _c === void 0 ? void 0 : _c.totalPageViews) || 0;
-    const totalUniqueVisitors = ((_d = allTimeStats[0]) === null || _d === void 0 ? void 0 : _d.uniqueVisitorRecords) || 0;
+    const totalUniqueVisitors = ((_d = allTimeStats[0]) === null || _d === void 0 ? void 0 : _d.uniqueVisitors) || 0;
+    // Top pages summary for stats overview
+    const topPages = yield getTopPages(5);
     // Daily trend for past N days
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - (days - 1));
@@ -81,7 +95,14 @@ const getPageAnalyticsStats = (...args_1) => __awaiter(void 0, [...args_1], void
             $group: {
                 _id: "$date",
                 totalPageViews: { $sum: "$count" },
-                uniqueVisitors: { $sum: 1 },
+                uniqueIPs: { $addToSet: "$ipAddress" },
+            },
+        },
+        {
+            $project: {
+                _id: 1,
+                totalPageViews: 1,
+                uniqueVisitors: { $size: "$uniqueIPs" },
             },
         },
         { $sort: { _id: 1 } },
@@ -96,6 +117,7 @@ const getPageAnalyticsStats = (...args_1) => __awaiter(void 0, [...args_1], void
         todayUniqueVisitors,
         totalPageViews,
         totalUniqueVisitors,
+        topPages,
         dailyTrend,
     };
 });
@@ -105,7 +127,7 @@ const getTopPages = (...args_1) => __awaiter(void 0, [...args_1], void 0, functi
             $group: {
                 _id: "$path",
                 totalViews: { $sum: "$count" },
-                uniqueVisitors: { $sum: 1 },
+                uniqueIPs: { $addToSet: "$ipAddress" },
             },
         },
         { $sort: { totalViews: -1 } },
@@ -115,7 +137,7 @@ const getTopPages = (...args_1) => __awaiter(void 0, [...args_1], void 0, functi
                 _id: 0,
                 path: "$_id",
                 totalViews: 1,
-                uniqueVisitors: 1,
+                uniqueVisitors: { $size: "$uniqueIPs" },
             },
         },
     ]);
