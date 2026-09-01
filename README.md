@@ -1,13 +1,38 @@
-# Appon Islam - Professional Portfolio Backend API 🚀
+<div align="center">
 
-[![Live Website](https://img.shields.io/badge/Live_Site-www.apponislam.com-blue?style=for-the-badge&logo=google-chrome)](https://www.apponislam.com)
+# 🚀 Appon Islam - Professional Portfolio Backend API
+
+### High-Performance RESTful API & Management System
+
+  <br />
+
+[![Live Website Banner](https://img.shields.io/badge/🌐_VISIT_LIVE_WEBSITE-WWW.APPONISLAM.COM-0070F3?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.apponislam.com)
+
+  <br />
+
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-v20+-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-v5.0-000000?style=for-the-badge&logo=express)](https://expressjs.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose_v9-47A248?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
+---
+
+### 🔗 **Live Website Application**: [https://www.apponislam.com](https://www.apponislam.com)
+
+---
+
+</div>
+
+<br />
+
 A robust, enterprise-grade RESTful API backend engineered for [Appon Islam's Portfolio & Management System](https://www.apponislam.com). Built with Node.js, Express, TypeScript, and MongoDB, featuring secure JWT authentication, multi-factor OTP flows, background activity audit logging, Resend email automation, and privacy-conscious page analytics tracking.
+
+---
+
+## 🌐 Live Website
+
+> 🚀 **Explore the Live Application**: **[https://www.apponislam.com](https://www.apponislam.com)**
 
 ---
 
