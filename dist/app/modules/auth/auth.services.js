@@ -35,7 +35,7 @@ const activity_services_1 = require("../activity/activity.services");
 const activity_interface_1 = require("../activity/activity.interface");
 const emailTemplates_1 = require("../../../utils/emailTemplates");
 const registerUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    // Check existing user
+    // Check existing user //
     const existing = yield auth_model_1.UserModel.findOne({ email: data.email });
     if (existing)
         throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Email already registered. Please sign in.");

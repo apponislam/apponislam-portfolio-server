@@ -10,7 +10,7 @@ import { ActivityType } from "../activity/activity.interface";
 import { sendOtpEmail, sendVerificationEmail, sendWelcomeEmail, sendEmailUpdateVerification, sendAdminPasswordResetEmail } from "../../../utils/emailTemplates";
 
 const registerUser = async (data: any) => {
-    // Check existing user
+    // Check existing user //
     const existing = await UserModel.findOne({ email: data.email });
     if (existing) throw new ApiError(httpStatus.BAD_REQUEST, "Email already registered. Please sign in.");
 
@@ -203,7 +203,7 @@ const requestPasswordReset = async (email: string) => {
     await user.save();
 
     // Send OTP email
-    sendOtpEmail(email, user.name as string || "User", otp);
+    sendOtpEmail(email, (user.name as string) || "User", otp);
 
     return { message: "OTP sent" };
 };
@@ -251,7 +251,7 @@ const resendOtp = async (email: string) => {
     await user.save();
 
     // Send email
-    sendOtpEmail(email, user.name as string || "User", otp);
+    sendOtpEmail(email, (user.name as string) || "User", otp);
 
     return { message: "OTP resent" };
 };
