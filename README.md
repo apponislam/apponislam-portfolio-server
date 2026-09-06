@@ -56,7 +56,7 @@ A robust, enterprise-grade RESTful API backend engineered for [Appon Islam's Por
 - **⚡ Performance & Middleware**:
   - Request body validation via Zod schemas
   - Centralized global error handling with custom `ApiError`
-  - Gzip HTTP response compression & CORS security headers
+  - CORS security headers
 
 ---
 
@@ -159,7 +159,7 @@ erDiagram
 - **Framework**: [Express.js v5](https://expressjs.com/)
 - **Database**: [MongoDB](https://www.mongodb.com/) + [Mongoose v9](https://mongoosejs.com/)
 - **Email Service**: [Resend API](https://resend.com/)
-- **Security & Utilities**: `bcrypt`, `jsonwebtoken`, `zod`, `cookie-parser`, `cors`, `compression`, `morgan`
+- **Security & Utilities**: `bcrypt`, `jsonwebtoken`, `zod`, `cookie-parser`, `cors`
 
 ---
 

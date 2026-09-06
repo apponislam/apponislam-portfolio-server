@@ -10,6 +10,11 @@ export default [
     ...tseslint.configs.recommended,
     {
         ignores: ["node_modules", "dist"],
+        languageOptions: {
+            globals: {
+                process: "readonly",
+            },
+        },
         rules: {
             "no-unused-vars": "error",
             "no-unused-expressions": "error",
@@ -17,9 +22,6 @@ export default [
             "no-console": "warn",
             "no-undef": "error",
             "@typescript-eslint/no-explicit-any": "warn",
-        },
-        globals: {
-            process: "readonly",
         },
     },
 ];

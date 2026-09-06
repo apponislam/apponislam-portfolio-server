@@ -3,8 +3,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 import fs from "fs";
-import compression from "compression";
-import morgan from "morgan";
 import notFound from "./errors/notFound";
 import globalErrorHandler from "./errors/globalErrorhandler";
 import router from "./app/routes";
@@ -19,15 +17,12 @@ const corsOptions = {
     credentials: true,
 };
 
-app.use(compression());
-app.use(morgan("dev"));
 app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../public"), { index: false }));
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.get("/", (req: Request, res: Response) => {
     const indexPath = path.join(__dirname, "../public/index.html");
