@@ -9,16 +9,11 @@ let server: Server;
 
 async function main() {
     try {
-        await mongoose.connect(config.mongodb_url as string, {
-            maxPoolSize: 10,
-            minPoolSize: 0,
-            serverSelectionTimeoutMS: 5000,
-            socketTimeoutMS: 45000,
-        });
+        await mongoose.connect(config.mongodb_url as string);
+        server = http.createServer(app);
 
         seedAdmin();
 
-        server = http.createServer(app);
         server.listen(Number(config.port), config.ip, () => {
             console.log(`✅ App listening on port ${config.port} on ${config.ip}`);
         });
