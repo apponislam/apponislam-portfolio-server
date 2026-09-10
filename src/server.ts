@@ -1,4 +1,3 @@
-import dns from "dns";
 import { Server } from "http";
 import app from "./app";
 import mongoose from "mongoose";
@@ -8,30 +7,23 @@ import { seedAdmin } from "./app/modules/auth/auth.seed";
 
 let server: Server;
 
-// Only set custom DNS if needed locally
-try {
-    dns.setServers(["8.8.8.8", "8.8.4.4"]);
-} catch (e) {
-    // Ignore DNS override errors on cloud hosts like Vercel
-}
-
 async function main() {
     try {
         await mongoose.connect(config.mongodb_url as string, {
-            maxPoolSize: 20,
-            minPoolSize: 5,
+            maxPoolSize: 10,
+            minPoolSize: 0,
             serverSelectionTimeoutMS: 5000,
             socketTimeoutMS: 45000,
         });
-        server = http.createServer(app);
 
         seedAdmin();
 
+        server = http.createServer(app);
         server.listen(Number(config.port), config.ip, () => {
             console.log(`✅ App listening on port ${config.port} on ${config.ip}`);
         });
     } catch (err) {
-        console.log("❌ DB Connection Failed:", err);
+        console.error("❌ DB Connection Failed:", err);
     }
 }
 

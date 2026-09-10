@@ -31,7 +31,11 @@ const activitySchema = new Schema<Activity>(
     }
 );
 
-// Compound index for optimal sorting/querying
+// Compound indexes for optimal sorting/querying
 activitySchema.index({ user: 1, isDeleted: 1, createdAt: -1 });
+activitySchema.index({ isDeleted: 1, createdAt: -1 });
+activitySchema.index({ action: 1, isDeleted: 1, createdAt: -1 });
+activitySchema.index({ user: 1, action: 1, isDeleted: 1, createdAt: -1 });
+
 
 export const ActivityModel = mongoose.model<Activity>("Activity", activitySchema);

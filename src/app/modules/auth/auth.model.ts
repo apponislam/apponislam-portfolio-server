@@ -113,6 +113,8 @@ UserSchema.index({ name: 1, isDeleted: 1 });
 UserSchema.index({ role: 1, isDeleted: 1 });
 UserSchema.index({ isActive: 1, isDeleted: 1 });
 UserSchema.index({ isEmailVerified: 1, isDeleted: 1 });
+UserSchema.index({ isDeleted: 1, createdAt: -1 });
+
 
 // Token & OTP lookup indexes (important for auth flows)
 UserSchema.index({ resetPasswordToken: 1, isDeleted: 1 });

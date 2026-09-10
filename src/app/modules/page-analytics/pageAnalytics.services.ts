@@ -45,74 +45,75 @@ const trackPageView = async (payload: {
 
 const getPageAnalyticsStats = async (days = 30) => {
     const todayStr = getTodayDateString();
-
-    // Today's overall summary
-    const todayStats = await PageAnalyticsModel.aggregate([
-        { $match: { date: todayStr } },
-        {
-            $group: {
-                _id: null,
-                totalPageViews: { $sum: "$count" },
-                uniqueIPs: { $addToSet: "$ipAddress" },
-            },
-        },
-        {
-            $project: {
-                totalPageViews: 1,
-                uniqueVisitors: { $size: "$uniqueIPs" },
-            },
-        },
-    ]);
-
-    const todayTotalPageViews = todayStats[0]?.totalPageViews || 0;
-    const todayUniqueVisitors = todayStats[0]?.uniqueVisitors || 0;
-
-    // All-time overall summary
-    const allTimeStats = await PageAnalyticsModel.aggregate([
-        {
-            $group: {
-                _id: null,
-                totalPageViews: { $sum: "$count" },
-                uniqueIPs: { $addToSet: "$ipAddress" },
-            },
-        },
-        {
-            $project: {
-                totalPageViews: 1,
-                uniqueVisitors: { $size: "$uniqueIPs" },
-            },
-        },
-    ]);
-
-    const totalPageViews = allTimeStats[0]?.totalPageViews || 0;
-    const totalUniqueVisitors = allTimeStats[0]?.uniqueVisitors || 0;
-
-    // Top pages summary for stats overview
-    const topPages = await getTopPages(5);
-
-    // Daily trend for past N days
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - (days - 1));
     const startDateStr = startDate.toISOString().split("T")[0];
 
-    const dailyBreakdown = await PageAnalyticsModel.aggregate([
-        { $match: { date: { $gte: startDateStr } } },
-        {
-            $group: {
-                _id: "$date",
-                totalPageViews: { $sum: "$count" },
-                uniqueIPs: { $addToSet: "$ipAddress" },
+    // Execute all 4 analytics database queries concurrently in parallel
+    const [todayStats, allTimeStats, topPages, dailyBreakdown] = await Promise.all([
+        // Today's overall summary
+        PageAnalyticsModel.aggregate([
+            { $match: { date: todayStr } },
+            {
+                $group: {
+                    _id: null,
+                    totalPageViews: { $sum: "$count" },
+                    uniqueIPs: { $addToSet: "$ipAddress" },
+                },
             },
-        },
-        {
-            $project: {
-                _id: 1,
-                totalPageViews: 1,
-                uniqueVisitors: { $size: "$uniqueIPs" },
+            {
+                $project: {
+                    totalPageViews: 1,
+                    uniqueVisitors: { $size: "$uniqueIPs" },
+                },
             },
-        },
-        { $sort: { _id: 1 } },
+        ]),
+
+        // All-time overall summary
+        PageAnalyticsModel.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalPageViews: { $sum: "$count" },
+                    uniqueIPs: { $addToSet: "$ipAddress" },
+                },
+            },
+            {
+                $project: {
+                    totalPageViews: 1,
+                    uniqueVisitors: { $size: "$uniqueIPs" },
+                },
+            },
+        ]),
+
+        // Top pages summary
+        getTopPages(5),
+
+        // Daily trend for past N days
+        PageAnalyticsModel.aggregate([
+            { $match: { date: { $gte: startDateStr } } },
+            {
+                $group: {
+                    _id: "$date",
+                    totalPageViews: { $sum: "$count" },
+                    uniqueIPs: { $addToSet: "$ipAddress" },
+                },
+            },
+            {
+                $project: {
+                    _id: 1,
+                    totalPageViews: 1,
+                    uniqueVisitors: { $size: "$uniqueIPs" },
+                },
+            },
+            { $sort: { _id: 1 } },
+        ]),
     ]);
+
+    const todayTotalPageViews = todayStats[0]?.totalPageViews || 0;
+    const todayUniqueVisitors = todayStats[0]?.uniqueVisitors || 0;
+    const totalPageViews = allTimeStats[0]?.totalPageViews || 0;
+    const totalUniqueVisitors = allTimeStats[0]?.uniqueVisitors || 0;
 
     const dailyTrend = dailyBreakdown.map((item) => ({
         date: item._id,

@@ -119,9 +119,15 @@ const getAllActivities = async (query: GetActivitiesQuery) => {
     }
 
     const skip = (Number(page) - 1) * Number(limit);
-    const activities = await ActivityModel.find(filter).populate("user", "name email phone profileImage").sort({ createdAt: -1 }).skip(skip).limit(Number(limit));
-
-    const total = await ActivityModel.countDocuments(filter);
+    const [activities, total] = await Promise.all([
+        ActivityModel.find(filter)
+            .populate("user", "name email phone profileImage")
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(Number(limit))
+            .lean(),
+        ActivityModel.countDocuments(filter),
+    ]);
 
     return {
         meta: {
