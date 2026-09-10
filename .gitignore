@@ -1,6 +1,8 @@
 node_modules
 .env
+dist
 
 doc.txt
 public/emails.html
 emails.html
+
