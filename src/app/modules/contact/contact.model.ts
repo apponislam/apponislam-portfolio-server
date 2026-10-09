@@ -57,11 +57,27 @@ const contactSchema = new Schema<IContact>(
     }
 );
 
-// Comprehensive indexes for admin filtering, search queries, and analytics
+// -----------------------------------------------------------------------------
+// COMPREHENSIVE INDEXES FOR SEARCH, FILTERING, SPAM CHECKING & ANALYTICS
+// -----------------------------------------------------------------------------
+
+// 1. Status & Time Compound Indexes (Admin filtering & pagination)
 contactSchema.index({ status: 1, createdAt: -1 });
 contactSchema.index({ createdAt: -1 });
+contactSchema.index({ repliedAt: -1 });
+
+// 2. User & Email Compound Indexes (Lookups & thread history)
 contactSchema.index({ email: 1, createdAt: -1 });
-contactSchema.index({ name: "text", email: "text", message: "text" });
-contactSchema.index({ ipAddress: 1 });
+contactSchema.index({ status: 1, email: 1, createdAt: -1 });
+
+// 3. Security & Anti-Spam / Rate-limiting Indexes
+contactSchema.index({ ipAddress: 1, createdAt: -1 });
+
+// 4. Text Search Index for multi-field admin search
+contactSchema.index(
+    { name: "text", email: "text", message: "text" },
+    { weights: { name: 3, email: 2, message: 1 }, name: "ContactTextIndex" }
+);
 
 export const ContactModel = model<IContact>("Contact", contactSchema);
+

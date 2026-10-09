@@ -8,7 +8,6 @@ const pageAnalyticsSchema = new Schema<IPageAnalytics>(
             required: true,
             default: "/",
             trim: true,
-            index: true,
         },
         ipAddress: {
             type: String,
@@ -18,6 +17,7 @@ const pageAnalyticsSchema = new Schema<IPageAnalytics>(
         userId: {
             type: Schema.Types.ObjectId,
             ref: "User",
+            index: true,
         },
         userAgent: {
             type: String,
@@ -26,7 +26,6 @@ const pageAnalyticsSchema = new Schema<IPageAnalytics>(
         date: {
             type: String,
             required: true,
-            index: true,
         },
         count: {
             type: Number,
@@ -43,13 +42,24 @@ const pageAnalyticsSchema = new Schema<IPageAnalytics>(
     }
 );
 
-// Compound unique index by Date + Path + IP to accurately track views per page per IP daily
+// -----------------------------------------------------------------------------
+// COMPOUND INDEXES FOR MAXIMUM QUERY & AGGREGATION PERFORMANCE
+// -----------------------------------------------------------------------------
+
+// 1. Compound Unique Index: Daily page view upsert tracking per IP
 pageAnalyticsSchema.index({ date: 1, path: 1, ipAddress: 1 }, { unique: true });
 
-// Query and sorting indexes for fast logs & analytics lookup
+// 2. Query & Sorting Indexes: Log filtering by path, date, IP, user with lastVisitedAt sort
 pageAnalyticsSchema.index({ lastVisitedAt: -1 });
 pageAnalyticsSchema.index({ date: -1, lastVisitedAt: -1 });
 pageAnalyticsSchema.index({ path: 1, lastVisitedAt: -1 });
+pageAnalyticsSchema.index({ date: -1, path: 1, lastVisitedAt: -1 });
+pageAnalyticsSchema.index({ ipAddress: 1, lastVisitedAt: -1 });
+pageAnalyticsSchema.index({ userId: 1, lastVisitedAt: -1 });
 
+// 3. Aggregation Indexes: Top pages, daily view count totals & analytics trends
+pageAnalyticsSchema.index({ path: 1, count: -1 });
+pageAnalyticsSchema.index({ date: 1, count: -1 });
 
 export const PageAnalyticsModel = mongoose.model<IPageAnalytics>("PageAnalytics", pageAnalyticsSchema);
+
