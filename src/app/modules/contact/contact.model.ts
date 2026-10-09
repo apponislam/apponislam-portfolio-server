@@ -74,10 +74,8 @@ contactSchema.index({ status: 1, email: 1, createdAt: -1 });
 contactSchema.index({ ipAddress: 1, createdAt: -1 });
 
 // 4. Text Search Index for multi-field admin search
-contactSchema.index(
-    { name: "text", email: "text", message: "text" },
-    { weights: { name: 3, email: 2, message: 1 }, name: "ContactTextIndex" }
-);
+contactSchema.index({ name: "text", email: "text", message: "text" });
 
 export const ContactModel = model<IContact>("Contact", contactSchema);
+
 
