@@ -7,6 +7,7 @@ import notFound from "./errors/notFound";
 import globalErrorHandler from "./errors/globalErrorhandler";
 import router from "./app/routes";
 import config from "./app/config";
+import { connectDB } from "./app/db";
 
 const app: Application = express();
 
@@ -38,6 +39,16 @@ app.get("/", (req: Request, res: Response) => {
 
         res.send(modifiedHtml);
     });
+});
+
+// Ensure database connection is active before processing API requests (essential for Vercel Serverless)
+app.use(async (req: Request, res: Response, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (err) {
+        next(err);
+    }
 });
 
 app.use("/api/v1", router);

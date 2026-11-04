@@ -3,19 +3,16 @@ import app from "./app";
 import mongoose from "mongoose";
 import config from "./app/config";
 import { seedAdmin } from "./app/modules/auth/auth.seed";
-import dns from "dns";
-
-// Fix querySrv ECONNREFUSED on networks where local DNS blocks SRV records
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+import { connectDB } from "./app/db";
 
 let server: Server;
 
 async function main() {
     try {
-        await mongoose.connect(config.mongodb_url as string);
+        await connectDB();
         server = http.createServer(app);
 
-        seedAdmin();
+        await seedAdmin();
 
         server.listen(Number(config.port), config.ip, () => {
             console.log(`✅ App listening on port ${config.port} on ${config.ip}`);
@@ -25,7 +22,10 @@ async function main() {
     }
 }
 
-main();
+// Only run server.listen in non-serverless environments (local development / standard Node host)
+if (!process.env.VERCEL) {
+    main();
+}
 
 const shutdown = (error?: any, exitCode = 1, signal?: string) => {
     if (error) console.error(`❌ ${signal || "Error"} detected:`, error);
