@@ -1,9 +1,12 @@
-import { Server } from "http";
+import http, { Server } from "http";
 import app from "./app";
 import mongoose from "mongoose";
-import http from "http";
 import config from "./app/config";
 import { seedAdmin } from "./app/modules/auth/auth.seed";
+import dns from "dns";
+
+// Fix querySrv ECONNREFUSED on networks where local DNS blocks SRV records
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 let server: Server;
 
