@@ -21,6 +21,20 @@ export interface IChatMessage {
     updatedAt?: Date;
 }
 
+export interface IPaginatedChatMessages {
+    meta: {
+        page: number;
+        limit: number;
+        total: number;
+        totalPages: number;
+        hasNext: boolean;
+        hasPrev: boolean;
+        hasMore?: boolean;
+        oldestCursor?: Date | string | null;
+        newestCursor?: Date | string | null;
+    };
+    data: IChatMessage[];
+}
 
 export type IChatSessionDocument = Document & IChatSession;
 export type IChatMessageDocument = Document & IChatMessage;

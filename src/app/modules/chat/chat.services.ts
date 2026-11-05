@@ -1,8 +1,9 @@
 import crypto from "crypto";
 import httpStatus from "http-status";
+import mongoose from "mongoose";
 import config from "../../config";
 import ApiError from "../../../errors/ApiError";
-import { IChatMessage, IChatSession, IOllamaChatMessage, IOllamaChatStreamChunk, ISSEStreamPayload } from "./chat.interface";
+import { IChatMessage, IChatSession, IOllamaChatMessage, IOllamaChatStreamChunk, IPaginatedChatMessages, ISSEStreamPayload } from "./chat.interface";
 import { ChatMessage, ChatSession } from "./chat.model";
 import { buildPortfolioSystemPrompt } from "./chat.knowledge";
 
@@ -114,15 +115,109 @@ const getSession = async (sessionId: string): Promise<IChatSession> => {
 };
 
 /**
- * Retrieve previous messages of a session in chronological order.
+ * Retrieve previous messages of a session with pagination & cursor-based lazy loading (scroll up).
  */
-const getSessionMessages = async (sessionId: string): Promise<IChatMessage[]> => {
+const getSessionMessages = async (sessionId: string, query?: Record<string, unknown>): Promise<IPaginatedChatMessages> => {
     // Validate session existence and validity first
     await getSession(sessionId);
 
-    const messages = await ChatMessage.find({ session: sessionId, isDeleted: false }).sort({ createdAt: 1 }).select("session role content status createdAt updatedAt");
+    const limit = Math.max(1, Math.min(100, Number(query?.limit) || 20));
+    const total = await ChatMessage.countDocuments({ session: sessionId, isDeleted: false });
 
-    return messages;
+    // 1. Check for cursor-based lazy loading ("before" parameter)
+    const beforeParam = query?.before as string | undefined;
+    let beforeDate: Date | null = null;
+
+    if (beforeParam) {
+        const parsed = new Date(beforeParam);
+        if (!isNaN(parsed.getTime())) {
+            beforeDate = parsed;
+        } else if (mongoose.isValidObjectId(beforeParam)) {
+            const targetMsg = await ChatMessage.findById(beforeParam).select("createdAt");
+            if (targetMsg?.createdAt) {
+                beforeDate = targetMsg.createdAt;
+            }
+        }
+    }
+
+    // If "before" cursor is supplied OR no explicit "page" param was provided:
+    // Use reverse chronological window (chat lazy-load mode: latest messages first, rendered ascending)
+    const isExplicitPage = Boolean(query?.page) && !beforeParam;
+
+    if (!isExplicitPage) {
+        const filter: Record<string, unknown> = { session: sessionId, isDeleted: false };
+        if (beforeDate) {
+            filter.createdAt = { $lt: beforeDate };
+        }
+
+        // Fetch newest matching messages up to limit
+        const rawDescMessages = await ChatMessage.find(filter)
+            .sort({ createdAt: -1 })
+            .limit(limit)
+            .select("session role content status createdAt updatedAt")
+            .lean();
+
+        // Check how many messages exist BEFORE the oldest one in this fetched batch
+        let olderRemainingCount = 0;
+        if (rawDescMessages.length > 0) {
+            const oldestFetchedDate = rawDescMessages[rawDescMessages.length - 1].createdAt;
+            olderRemainingCount = await ChatMessage.countDocuments({
+                session: sessionId,
+                isDeleted: false,
+                createdAt: { $lt: oldestFetchedDate },
+            });
+        }
+
+        // Reverse to chronological order (oldest -> newest) for direct chat bubble rendering
+        const chronologicalMessages = rawDescMessages.reverse();
+
+        const oldestCursor = chronologicalMessages.length > 0 ? chronologicalMessages[0].createdAt : null;
+        const newestCursor = chronologicalMessages.length > 0 ? chronologicalMessages[chronologicalMessages.length - 1].createdAt : null;
+        const hasMore = olderRemainingCount > 0;
+
+        return {
+            meta: {
+                page: 1,
+                limit,
+                total,
+                totalPages: Math.ceil(total / limit),
+                hasNext: hasMore,
+                hasPrev: Boolean(beforeDate),
+                hasMore,
+                oldestCursor,
+                newestCursor,
+            },
+            data: chronologicalMessages as unknown as IChatMessage[],
+        };
+    }
+
+    // 2. Standard offset pagination fallback when explicit ?page= is requested
+    const page = Math.max(1, Number(query?.page) || 1);
+    const skip = (page - 1) * limit;
+    const sortOrder = query?.sortOrder === "desc" || query?.order === "desc" ? -1 : 1;
+    const filter = { session: sessionId, isDeleted: false };
+
+    const messages = await ChatMessage.find(filter)
+        .sort({ createdAt: sortOrder })
+        .skip(skip)
+        .limit(limit)
+        .select("session role content status createdAt updatedAt")
+        .lean();
+
+    return {
+        meta: {
+            page,
+            limit,
+            total,
+            totalPages: Math.ceil(total / limit),
+            hasNext: page * limit < total,
+            hasPrev: page > 1,
+            hasMore: page * limit < total,
+            oldestCursor: messages.length > 0 ? messages[0].createdAt : null,
+            newestCursor: messages.length > 0 ? messages[messages.length - 1].createdAt : null,
+        },
+        data: messages as unknown as IChatMessage[],
+    };
 };
 
 /**

@@ -42,13 +42,14 @@ const getSession = catchAsync(async (req: Request, res: Response) => {
  */
 const getSessionMessages = catchAsync(async (req: Request, res: Response) => {
     const sessionId = req.params.sessionId as string;
-    const messages = await chatServices.getSessionMessages(sessionId);
+    const result = await chatServices.getSessionMessages(sessionId, req.query);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
         message: "Chat messages retrieved successfully",
-        data: messages,
+        meta: result.meta,
+        data: result.data,
     });
 });
 
