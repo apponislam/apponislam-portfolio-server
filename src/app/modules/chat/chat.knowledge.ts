@@ -193,47 +193,28 @@ Respond warmly, professionally, and accurately.`.trim();
     const experienceYears = stats.yearsOfCodingExperience || "4+";
 
     // 1. Social Profiles
-    const socialLines: string[] = [];
-    if (p.socialLinks && p.socialLinks.length > 0) {
-        for (const s of p.socialLinks) {
-            socialLines.push(`- **${s.platform}**: ${s.url}${s.description ? ` (${s.description})` : ""}`);
-        }
-    } else if (legacyP.social) {
-        for (const [platform, url] of Object.entries(legacyP.social)) {
-            socialLines.push(`- **${platform}**: ${url}`);
-        }
-    }
+    const socialSummary = p.socialLinks?.length
+        ? p.socialLinks.map((s) => `${s.platform} (${s.url})`).join(" | ")
+        : "GitHub (https://github.com/apponislam) | LinkedIn (https://www.linkedin.com/in/apponislam/)";
 
     // 2. Experience
-    const expLines: string[] = [];
-    if (data.experience && data.experience.length > 0) {
-        data.experience.forEach((e, idx) => {
-            const bulletStr = (e.description || []).map((b) => `   * ${b}`).join("\n");
-            expLines.push(`${idx + 1}. **${e.title}** at **${e.organization}** (${e.duration})\n${bulletStr}`);
-        });
-    }
+    const expLines = (data.experience || []).map((e) => {
+        const desc = e.description ? `: ${e.description.join(" ")}` : "";
+        return `- **${e.title}** at **${e.organization}** (${e.duration})${desc}`;
+    });
 
-    // 3. Education
-    const eduLines: string[] = [];
-    if (data.education && data.education.length > 0) {
-        data.education.forEach((edu, idx) => {
-            const loc = edu.location ? ` (${edu.location})` : "";
-            const bulletStr = (edu.description || []).map((b) => `   * ${b}`).join("\n");
-            eduLines.push(`${idx + 1}. **${edu.title}** - ${edu.organization}${loc} [${edu.duration}]\n${bulletStr}`);
-        });
-    }
+    // 3. Education & Certifications
+    const eduLines = (data.education || []).map((edu) => {
+        const loc = edu.location ? ` in ${edu.location}` : "";
+        return `- **${edu.title}** - ${edu.organization}${loc} (${edu.duration})`;
+    });
 
-    // 4. Certificates
-    const certLines: string[] = [];
-    if (data.certificates && data.certificates.length > 0) {
-        data.certificates.forEach((c, idx) => {
-            const verify = c.credentialUrl ? ` | Verification: ${c.credentialUrl}` : "";
-            const desc = c.description ? `\n   ${c.description.join(" ")}` : "";
-            certLines.push(`${idx + 1}. **${c.title}** - Issued by ${c.issuer} (${c.issueDate})${verify}${desc}`);
-        });
-    }
+    const certLines = (data.certificates || []).map((c) => {
+        const verify = c.credentialUrl ? ` [Verify: ${c.credentialUrl}]` : "";
+        return `- **${c.title}** (${c.issuer}, ${c.issueDate})${verify}`;
+    });
 
-    // 5. Categorized Skills
+    // 4. Categorized Skills
     const skillLines: string[] = [];
     const skillsSource = data.skills?.categorized || data.skills;
     if (skillsSource && typeof skillsSource === "object") {
@@ -256,83 +237,57 @@ Respond warmly, professionally, and accurately.`.trim();
         }
     }
 
-    // 6. Projects (All 9 projects with exact links & tech stacks)
+    // 5. Featured Projects (9 projects with direct links and 1-line overview)
     const projectList = data.projects?.allProjects || data.projects?.featured || data.featuredProjects || [];
-    const projectLines: string[] = [];
-    projectList.forEach((proj, idx) => {
+    const projectLines = projectList.map((proj, idx) => {
         const pName = proj.companyName || proj.title || `Project #${idx + 1}`;
-        const pDesc = proj.shortDescription || proj.description || "";
-        const catStr = (proj.category || []).join(", ");
-        const techStr = (proj.techStack || proj.technologies || []).join(", ");
-
         const demoUrl = proj.links?.demo?.url && !proj.links.demo.disabled ? proj.links.demo.url : proj.liveUrl;
         const ghFrontUrl = proj.links?.githubFrontend?.url && !proj.links.githubFrontend.disabled ? proj.links.githubFrontend.url : proj.githubUrl;
         const ghBackUrl = proj.links?.githubBackend?.url && !proj.links.githubBackend.disabled ? proj.links.githubBackend.url : null;
 
-        const linkParts: string[] = [];
-        if (demoUrl) linkParts.push(`Live Demo: ${demoUrl}`);
-        if (ghFrontUrl) linkParts.push(`Frontend Repo: ${ghFrontUrl}`);
-        if (ghBackUrl) linkParts.push(`Backend Repo: ${ghBackUrl}`);
+        const links: string[] = [];
+        if (demoUrl) links.push(`Live: ${demoUrl}`);
+        if (ghFrontUrl) links.push(`Client GH: ${ghFrontUrl}`);
+        if (ghBackUrl) links.push(`Server GH: ${ghBackUrl}`);
 
-        const highlights = proj.descriptionDetails?.bullets?.length ? `\n   * Highlights: ${proj.descriptionDetails.bullets.join("; ")}` : "";
+        const summary = (proj.shortDescription || proj.description || "").split(".")[0] + ".";
+        const tech = (proj.techStack || proj.technologies || []).slice(0, 8).join(", ");
 
-        projectLines.push(`${idx + 1}. **${pName}**${catStr ? ` [${catStr}]` : ""}\n` + `   - Overview: ${pDesc}\n` + `   - Technologies: ${techStr}\n` + (linkParts.length ? `   - URLs: ${linkParts.join(" | ")}\n` : "") + highlights);
+        return `${idx + 1}. **${pName}**${links.length ? ` [${links.join(" | ")}]` : ""}: ${summary}${tech ? ` (Stack: ${tech})` : ""}`;
     });
 
-    // 7. Verified Knowledge Base Q&A
-    const kbLines: string[] = [];
-    if (data.knowledgeBase && data.knowledgeBase.length > 0) {
-        data.knowledgeBase.forEach((kb) => {
-            kbLines.push(`Q: ${kb.question}\nA: ${kb.answer}`);
-        });
-    } else if (data.faqs && data.faqs.length > 0) {
-        data.faqs.forEach((faq) => {
-            kbLines.push(`Q: ${faq.question}\nA: ${faq.answer}`);
-        });
-    }
+    return `You are the official AI assistant on Appon Islam's personal portfolio website (www.apponislam.com).
+Represent Appon warmly, accurately, and concisely.
 
-    return `You are the official, intelligent AI assistant on Appon Islam's personal portfolio website (www.apponislam.com).
-Your primary role is to warmly represent Appon Islam, answer visitors' and recruiters' questions with 100% factual accuracy, showcase his projects, skills, education, and career history, and help potential employers or clients contact and hire him.
+### OFFICIAL PUBLIC CONTACT & PROFILES:
+- Full Name: ${name} | Title: ${title}
+- Bio: ${bio}
+- Official Public Email: ${email}
+- Public Phone / WhatsApp: ${phone}
+- Location: ${location}
+- Availability: ${statusText} (${experienceYears} years coding experience)
+- Public Portfolio: ${website}
+- Public Resume Link: ${resumeUrl}
+- Public Social Profiles: ${socialSummary}
 
-### APPON ISLAM'S PROFILE & CONTACT INFO:
-- **Full Name**: ${name}
-- **Professional Title**: ${title}
-- **Bio**: ${bio}
-- **Primary Email**: ${email}
-- **Phone / WhatsApp**: ${phone}
-- **Location**: ${location}
-- **Availability / Status**: ${statusText}
-- **Coding Experience**: ${experienceYears} of professional & practical coding experience
-- **Portfolio Website**: ${website}
-- **Curriculum Vitae / Resume Link**: ${resumeUrl}
+### WORK EXPERIENCE:
+${expLines.join("\n")}
 
-### SOCIAL & PROFESSIONAL LINKS:
-${socialLines.join("\n")}
-
-### CURRENT WORK EXPERIENCE:
-${expLines.join("\n\n")}
-
-### EDUCATION & ACADEMIC BACKGROUND:
-${eduLines.join("\n\n")}
-
-### CERTIFICATIONS & COMPETITIVE CODING:
-${certLines.join("\n\n")}
+### EDUCATION & CERTIFICATIONS:
+${eduLines.join("\n")}
+${certLines.join("\n")}
 
 ### TECHNICAL SKILLS:
 ${skillLines.join("\n")}
 
-### COMPLETE PROJECT PORTFOLIO (${projectList.length} PROJECTS):
-${projectLines.join("\n\n")}
+### FEATURED PROJECTS (${projectList.length} PROJECTS):
+${projectLines.join("\n")}
 
-### VERIFIED KNOWLEDGE BASE & FREQUENT QUESTIONS:
-${kbLines.join("\n\n")}
-
-### STRICT BEHAVIORAL INSTRUCTIONS:
-1. **Grounding & Accuracy**: Always answer using ONLY the factual data provided above. Never invent fake projects, fake links, or fake metrics.
-2. **Contact & Hiring**: Whenever asked how to contact, hire, or collaborate with Appon, immediately provide his direct email (${email}) and phone/WhatsApp (${phone}), and mention he is currently "${statusText}".
-3. **Exact Links**: When asked for project demos, GitHub repositories, or his Resume, always give the exact URLs listed above.
-4. **Tone & Style**: Be articulate, friendly, respectful, and developer-focused. Format responses with clean markdown (bullet points, bold text).
-5. **Unknown Inquiries**: If a visitor asks about something not covered in the knowledge base, politely state that you don't have that specific detail and invite them to reach out directly to Appon at ${email}.
+### INSTRUCTIONS:
+1. **Be Concise**: Keep answers short, direct, and well-structured (2 to 4 sentences max). Never generate unnecessary filler or essays.
+2. **Grounding**: Answer strictly using verified facts above. Never invent fake links or statistics.
+3. **Contact Details**: When visitors ask how to contact, email, or hire Appon, always share his official public email (${email}) and phone/WhatsApp (${phone}).
+4. **Links**: Provide the exact verified URLs when asked for demos, GitHub repos, or his Resume.
 ${customEnvPrompt ? `\n### ADDITIONAL INSTRUCTIONS:\n${customEnvPrompt}` : ""}
 `.trim();
 };

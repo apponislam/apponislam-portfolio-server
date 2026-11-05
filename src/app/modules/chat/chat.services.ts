@@ -218,25 +218,37 @@ const streamChat = async function* (sessionId: string, userMessageContent: strin
                 messages: ollamaMessages,
                 stream: true,
                 options: {
-                    num_ctx: 8192,
+                    num_ctx: 2048,
+                    num_predict: 250,
+                    temperature: 0.3,
                 },
+                keep_alive: "24h",
             }),
             signal,
         });
     } catch (fetchErr: unknown) {
-        await ChatMessage.findByIdAndUpdate(assistantMessage._id, { status: "failed" });
+        await ChatMessage.findByIdAndUpdate(assistantMessage._id, {
+            status: "failed",
+            content: "Connection timed out while contacting the AI service. Please try sending your message again.",
+        });
         const errMessage = fetchErr instanceof Error ? fetchErr.message : "Connection failed";
         throw new ApiError(httpStatus.SERVICE_UNAVAILABLE, `Failed to connect to Ollama server: ${errMessage}`);
     }
 
     if (!ollamaRes.ok) {
-        await ChatMessage.findByIdAndUpdate(assistantMessage._id, { status: "failed" });
+        await ChatMessage.findByIdAndUpdate(assistantMessage._id, {
+            status: "failed",
+            content: "The AI service is currently unavailable. Please try again in a moment.",
+        });
         throw new ApiError(httpStatus.BAD_GATEWAY, `Ollama server returned error status ${ollamaRes.status} ${ollamaRes.statusText}`);
     }
 
     const reader = ollamaRes.body?.getReader();
     if (!reader) {
-        await ChatMessage.findByIdAndUpdate(assistantMessage._id, { status: "failed" });
+        await ChatMessage.findByIdAndUpdate(assistantMessage._id, {
+            status: "failed",
+            content: "No response stream could be established with the AI service. Please try again.",
+        });
         throw new ApiError(httpStatus.BAD_GATEWAY, "No readable response stream available from Ollama");
     }
 
@@ -329,7 +341,7 @@ const streamChat = async function* (sessionId: string, userMessageContent: strin
 
         // Save accumulated content even if aborted or error occurred
         await ChatMessage.findByIdAndUpdate(assistantMessage._id, {
-            content: accumulatedContent,
+            content: accumulatedContent || "Sorry, the response was interrupted. Please try again.",
             status: isAborted && accumulatedContent ? "completed" : "failed",
         });
 
