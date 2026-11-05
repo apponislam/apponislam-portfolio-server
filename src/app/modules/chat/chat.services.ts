@@ -4,6 +4,7 @@ import config from "../../config";
 import ApiError from "../../../errors/ApiError";
 import { IChatMessage, IChatSession, IOllamaChatMessage, IOllamaChatStreamChunk, ISSEStreamPayload } from "./chat.interface";
 import { ChatMessage, ChatSession } from "./chat.model";
+import { buildPortfolioSystemPrompt } from "./chat.knowledge";
 
 /**
  * Check if a session has expired based on its expiresAt timestamp.
@@ -100,7 +101,7 @@ const getSession = async (sessionId: string): Promise<IChatSession> => {
         throw new ApiError(httpStatus.BAD_REQUEST, "Session ID is required");
     }
 
-    const session = await ChatSession.findOne({ sessionId });
+    const session = await ChatSession.findOne({ sessionId, isDeleted: false });
     if (!session) {
         throw new ApiError(httpStatus.NOT_FOUND, "Chat session not found");
     }
@@ -119,26 +120,27 @@ const getSessionMessages = async (sessionId: string): Promise<IChatMessage[]> =>
     // Validate session existence and validity first
     await getSession(sessionId);
 
-    const messages = await ChatMessage.find({ session: sessionId }).sort({ createdAt: 1 }).select("session role content status createdAt updatedAt");
+    const messages = await ChatMessage.find({ session: sessionId, isDeleted: false }).sort({ createdAt: 1 }).select("session role content status createdAt updatedAt");
 
     return messages;
 };
 
 /**
- * Delete a session and all its associated messages.
+ * Soft delete a session and all its associated messages.
  */
 const deleteSession = async (sessionId: string): Promise<void> => {
     if (!sessionId) {
         throw new ApiError(httpStatus.BAD_REQUEST, "Session ID is required");
     }
 
-    const session = await ChatSession.findOne({ sessionId });
+    const session = await ChatSession.findOne({ sessionId, isDeleted: false });
     if (!session) {
         throw new ApiError(httpStatus.NOT_FOUND, "Chat session not found");
     }
 
-    await ChatSession.deleteOne({ sessionId });
-    await ChatMessage.deleteMany({ session: sessionId });
+    const deletedAt = new Date();
+    await ChatSession.updateOne({ sessionId }, { $set: { isDeleted: true, deletedAt } });
+    await ChatMessage.updateMany({ session: sessionId }, { $set: { isDeleted: true, deletedAt } });
 };
 
 /**
@@ -157,6 +159,7 @@ const streamChat = async function* (sessionId: string, userMessageContent: strin
     const previousMessages = await ChatMessage.find({
         session: sessionId,
         status: "completed",
+        isDeleted: false,
     })
         .sort({ createdAt: 1 })
         .select("role content");
@@ -164,10 +167,11 @@ const streamChat = async function* (sessionId: string, userMessageContent: strin
     // 3. Format message history for Ollama /api/chat
     const ollamaMessages: IOllamaChatMessage[] = [];
 
-    if (config.ollama.systemPrompt) {
+    const systemPrompt = buildPortfolioSystemPrompt();
+    if (systemPrompt) {
         ollamaMessages.push({
             role: "system",
-            content: config.ollama.systemPrompt,
+            content: systemPrompt,
         });
     }
 
@@ -213,6 +217,9 @@ const streamChat = async function* (sessionId: string, userMessageContent: strin
                 model: session.model || getOllamaModel(),
                 messages: ollamaMessages,
                 stream: true,
+                options: {
+                    num_ctx: 8192,
+                },
             }),
             signal,
         });

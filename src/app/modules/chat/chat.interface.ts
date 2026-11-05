@@ -4,6 +4,8 @@ export interface IChatSession {
     messageCount: number;
     lastActivityAt: Date;
     expiresAt: Date;
+    isDeleted?: boolean;
+    deletedAt?: Date;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -13,9 +15,12 @@ export interface IChatMessage {
     role: "user" | "assistant";
     content: string;
     status: "pending" | "completed" | "failed";
+    isDeleted?: boolean;
+    deletedAt?: Date;
     createdAt?: Date;
     updatedAt?: Date;
 }
+
 
 export type IChatSessionDocument = Document & IChatSession;
 export type IChatMessageDocument = Document & IChatMessage;
