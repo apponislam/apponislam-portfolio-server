@@ -117,626 +117,8 @@
         "totalCount": 9,
         "featured": [
             {
-                "_id": "bike-shop-application",
-                "serial": 1,
-                "type": "Personal Project",
-                "companyName": "Bike Shop Application",
-                "category": ["Full Stack", "Web Dev"],
-                "shortDescription": "A complete bike e-commerce platform with secure JWT-based authentication, role-based dashboards, product filters, and integrated SurjoPay payment system.",
-                "links": {
-                    "demo": {
-                        "url": "https://peppy-hotteok-65ea2d.netlify.app/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/bike-store-frontend",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/bike-store-backend",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Developed full-stack bike e-commerce platform with Next.js, Express.js, and MongoDB.", "Integrated JWT role authentication, product filter workflows, and SurjoPay checkout."]
-                    }
-                ],
-                "techStack": ["Next.js", "React", "Tailwind CSS", "Node.js", "Express.js", "Typescript", "MongoDB", "JWT", "SurjoPay"],
-                "startDate": "2025-04-01",
-                "endDate": "2025-06-10",
-                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750945838/iihrwdulbus4qb2gel5v.png",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "Bike Shop is an online platform that allows customers to browse, search, and filter bikes with ease. Authenticated users can place orders, track status, and manage their profiles securely.",
-                        "Admins can manage all users, orders, and product listings with complete control from their dedicated dashboard. SurjoPay is integrated for secure payment transactions."
-                    ],
-                    "bullets": ["JWT-based role authentication for customers and admins", "Dynamic search, filters, and product detail pages", "SurjoPay integration for secure checkout", "Admin dashboard for user, product, and order management", "Track orders with real-time status updates"]
-                }
-            },
-            {
-                "_id": "ap-classroom",
-                "serial": 2,
-                "type": "Personal Project",
-                "companyName": "AP Classroom",
-                "category": ["Full Stack", "Web Dev"],
-                "shortDescription": "A MERN-stack learning-management platform with role-based dashboards for students, teachers, and admins, featuring class creation, enrollment, assignments, payments, and comprehensive analytics.",
-                "links": {
-                    "demo": {
-                        "url": "https://assignmentb9a12.web.app/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/Classrooms-client",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/Classrooms-server",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Built MERN learning management system with role-based dashboards for students, teachers, and admins.", "Implemented class approval workflows, TanStack Query caching, and SurjoPay course enrollment."]
-                    }
-                ],
-                "techStack": ["React", "Next.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT", "TanStack Query", "react-hook-form", "SurjoPay"],
-                "startDate": "2025-05-15",
-                "endDate": "2025-06-26",
-                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750942876/alwzdx9qsdzhzneplt6g.png",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "EduManage streamlines class management by connecting institutions, tutors, and students on a single, responsive platform. Users register securely, browse approved classes, and enroll using SurjoPay-powered checkout.",
-                        "Role-based dashboards empower teachers to add classes and assignments, students to track progress and submit work, and admins to approve content, handle user roles, and monitor site analytics—all with real-time feedback and toast notifications."
-                    ],
-                    "bullets": [
-                        "JWT authentication with secure password hashing",
-                        "Student, Teacher, and Admin dashboards with protected routes",
-                        "Teacher request workflow and class approval pipeline",
-                        "TanStack Query for optimized GET data fetching",
-                        "Full CRUD on users, classes, orders, and assignments",
-                        "Nested feedback system displayed on the Home page",
-                        "SurjoPay integration for paid course enrollment",
-                        "Responsive UI for mobile, tablet, and desktop",
-                        "Toast alerts for all CRUD operations and auth events",
-                        "Environment-secured MongoDB & Firebase credentials"
-                    ]
-                }
-            },
-            {
-                "_id": "appon-assignment-library",
-                "serial": 3,
-                "type": "Personal Project",
-                "companyName": "Appon Assignment Library",
-                "category": ["Full Stack", "Web Dev"],
-                "shortDescription": "An online group study platform built with the MERN stack allowing users to create, attempt, and grade assignments collaboratively with secure auth, role-based logic, and PDF preview.",
-                "links": {
-                    "demo": {
-                        "url": "https://assignmentb9a11.web.app/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/assignments-client",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/assignments-server",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Engineered collaborative study platform allowing users to create, attempt, and grade assignments.", "Implemented PDF preview integration, JWT auth, theme toggle, and react-hook-form validation."]
-                    }
-                ],
-                "techStack": ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Firebase", "Typescript", "Javascript", "HTML 5", "CSS 3", "Google Auth"],
-                "startDate": "2025-06-10",
-                "endDate": "2025-06-26",
-                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750943676/btd2rfqpojdayjpuug2q.png",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "GroupStudy Hub is a MERN stack web app for students to collaboratively create, take, and evaluate assignments. Each user can post new assignments, attempt others', and grade pending submissions from friends. The system supports file-based submissions, grading workflows, and personalized dashboards.",
-                        "The platform features a custom design, PDF preview in submitted assignments, JWT-based protected routes, responsive layout, and dark/light mode toggle for better user experience."
-                    ],
-                    "bullets": [
-                        "JWT-based auth with token storage in localStorage for Email/Google login",
-                        "Create, view, filter, update, and delete assignments (CRUD)",
-                        "Only the creator can delete an assignment (with secure checks)",
-                        "Users can submit assignments via link + notes with file preview support",
-                        "Admins and users can mark assignments and give feedback",
-                        "Dark/Light theme toggle for accessibility and user preference",
-                        "PDF preview in iframe on submitted assignments page",
-                        "Form validation on all forms with `react-hook-form`",
-                        "Difficulty level filtering using a dropdown menu",
-                        "Responsive design for desktop, tablet, and mobile devices"
-                    ]
-                }
-            }
-        ],
-        "allProjects": [
-            {
-                "_id": "bike-shop-application",
-                "serial": 1,
-                "type": "Personal Project",
-                "companyName": "Bike Shop Application",
-                "category": ["Full Stack", "Web Dev"],
-                "shortDescription": "A complete bike e-commerce platform with secure JWT-based authentication, role-based dashboards, product filters, and integrated SurjoPay payment system.",
-                "links": {
-                    "demo": {
-                        "url": "https://peppy-hotteok-65ea2d.netlify.app/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/bike-store-frontend",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/bike-store-backend",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Developed full-stack bike e-commerce platform with Next.js, Express.js, and MongoDB.", "Integrated JWT role authentication, product filter workflows, and SurjoPay checkout."]
-                    }
-                ],
-                "techStack": ["Next.js", "React", "Tailwind CSS", "Node.js", "Express.js", "Typescript", "MongoDB", "JWT", "SurjoPay"],
-                "startDate": "2025-04-01",
-                "endDate": "2025-06-10",
-                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750945838/iihrwdulbus4qb2gel5v.png",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "Bike Shop is an online platform that allows customers to browse, search, and filter bikes with ease. Authenticated users can place orders, track status, and manage their profiles securely.",
-                        "Admins can manage all users, orders, and product listings with complete control from their dedicated dashboard. SurjoPay is integrated for secure payment transactions."
-                    ],
-                    "bullets": ["JWT-based role authentication for customers and admins", "Dynamic search, filters, and product detail pages", "SurjoPay integration for secure checkout", "Admin dashboard for user, product, and order management", "Track orders with real-time status updates"]
-                }
-            },
-            {
-                "_id": "ap-classroom",
-                "serial": 2,
-                "type": "Personal Project",
-                "companyName": "AP Classroom",
-                "category": ["Full Stack", "Web Dev"],
-                "shortDescription": "A MERN-stack learning-management platform with role-based dashboards for students, teachers, and admins, featuring class creation, enrollment, assignments, payments, and comprehensive analytics.",
-                "links": {
-                    "demo": {
-                        "url": "https://assignmentb9a12.web.app/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/Classrooms-client",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/Classrooms-server",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Built MERN learning management system with role-based dashboards for students, teachers, and admins.", "Implemented class approval workflows, TanStack Query caching, and SurjoPay course enrollment."]
-                    }
-                ],
-                "techStack": ["React", "Next.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT", "TanStack Query", "react-hook-form", "SurjoPay"],
-                "startDate": "2025-05-15",
-                "endDate": "2025-06-26",
-                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750942876/alwzdx9qsdzhzneplt6g.png",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "EduManage streamlines class management by connecting institutions, tutors, and students on a single, responsive platform. Users register securely, browse approved classes, and enroll using SurjoPay-powered checkout.",
-                        "Role-based dashboards empower teachers to add classes and assignments, students to track progress and submit work, and admins to approve content, handle user roles, and monitor site analytics—all with real-time feedback and toast notifications."
-                    ],
-                    "bullets": [
-                        "JWT authentication with secure password hashing",
-                        "Student, Teacher, and Admin dashboards with protected routes",
-                        "Teacher request workflow and class approval pipeline",
-                        "TanStack Query for optimized GET data fetching",
-                        "Full CRUD on users, classes, orders, and assignments",
-                        "Nested feedback system displayed on the Home page",
-                        "SurjoPay integration for paid course enrollment",
-                        "Responsive UI for mobile, tablet, and desktop",
-                        "Toast alerts for all CRUD operations and auth events",
-                        "Environment-secured MongoDB & Firebase credentials"
-                    ]
-                }
-            },
-            {
-                "_id": "appon-assignment-library",
-                "serial": 3,
-                "type": "Personal Project",
-                "companyName": "Appon Assignment Library",
-                "category": ["Full Stack", "Web Dev"],
-                "shortDescription": "An online group study platform built with the MERN stack allowing users to create, attempt, and grade assignments collaboratively with secure auth, role-based logic, and PDF preview.",
-                "links": {
-                    "demo": {
-                        "url": "https://assignmentb9a11.web.app/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/assignments-client",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/assignments-server",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Engineered collaborative study platform allowing users to create, attempt, and grade assignments.", "Implemented PDF preview integration, JWT auth, theme toggle, and react-hook-form validation."]
-                    }
-                ],
-                "techStack": ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Firebase", "Typescript", "Javascript", "HTML 5", "CSS 3", "Google Auth"],
-                "startDate": "2025-06-10",
-                "endDate": "2025-06-26",
-                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750943676/btd2rfqpojdayjpuug2q.png",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "GroupStudy Hub is a MERN stack web app for students to collaboratively create, take, and evaluate assignments. Each user can post new assignments, attempt others', and grade pending submissions from friends. The system supports file-based submissions, grading workflows, and personalized dashboards.",
-                        "The platform features a custom design, PDF preview in submitted assignments, JWT-based protected routes, responsive layout, and dark/light mode toggle for better user experience."
-                    ],
-                    "bullets": [
-                        "JWT-based auth with token storage in localStorage for Email/Google login",
-                        "Create, view, filter, update, and delete assignments (CRUD)",
-                        "Only the creator can delete an assignment (with secure checks)",
-                        "Users can submit assignments via link + notes with file preview support",
-                        "Admins and users can mark assignments and give feedback",
-                        "Dark/Light theme toggle for accessibility and user preference",
-                        "PDF preview in iframe on submitted assignments page",
-                        "Form validation on all forms with `react-hook-form`",
-                        "Difficulty level filtering using a dropdown menu",
-                        "Responsive design for desktop, tablet, and mobile devices"
-                    ]
-                }
-            },
-            {
-                "_id": "appon-painting-drawing",
-                "serial": 4,
-                "type": "Personal Project",
-                "companyName": "Appon Painting & Drawing",
-                "category": ["Full Stack", "Web Dev"],
-                "shortDescription": "Appon Painting & Drawing is a Jute & Wooden-Craft e-commerce platform with secure auth, private dashboards, and fully responsive design.",
-                "links": {
-                    "demo": {
-                        "url": "https://assignmentb9a10.web.app/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/painting-drawing-client",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/painting-drawing-server",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Developed craft e-commerce application with category/sub-category browsing & management.", "Integrated Firebase auth, JWT protected routes, dark/light theme, and CRUD dashboards."]
-                    }
-                ],
-                "techStack": ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Firebase", "Typescript", "Javascript", "HTML 5", "CSS 3", "Google Auth"],
-                "startDate": "2025-06-12",
-                "endDate": "2025-06-26",
-                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750959177/q5uqgngk8eubzpk0nwe3.png",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "CraftNest lets artists and buyers connect over unique jute and wooden crafts. Users can securely add, update, and manage their own products, while visitors explore curated items by sub-category.",
-                        "The site features JWT-protected routes, Google/Firebase authentication, TanStack-Query data fetching, and dark/light theme switching for an engaging shopping experience."
-                    ],
-                    "bullets": [
-                        "Private dashboards for adding, updating, and deleting crafts",
-                        "Category & sub-category filtering with responsive UI",
-                        "Form validation and toast notifications for all CRUD actions",
-                        "Dark / light theme toggle and Lottie animations on the home page",
-                        "Fully environment-secured Firebase & MongoDB credentials"
-                    ]
-                }
-            },
-            {
-                "_id": "sustainability-idea-hub",
-                "serial": 5,
-                "type": "Personal Project",
-                "companyName": "Sustainability Idea Hub",
-                "category": ["Full Stack", "Web Dev"],
-                "shortDescription": "A full-stack platform for sharing and managing sustainability-focused ideas with role-based access, voting, comments, and paid content system.",
-                "links": {
-                    "demo": {
-                        "url": "https://idea-hub-client.vercel.app/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "live": {
-                        "url": "https://idea-hub-client.vercel.app/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/idea-hub-client",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/idea-hub-server",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Created full-stack idea sharing platform with PostgreSQL, Prisma ORM, and Next.js.", "Implemented SSLCommerz paid content access, Reddit-style nested comments, and voting."]
-                    }
-                ],
-                "techStack": ["Next.js", "React", "Tailwind CSS", "Node.js", "Express.js", "Typescript", "PostgreSQL", "Prisma", "JWT"],
-                "startDate": "2025-03-10",
-                "endDate": "2025-05-01",
-                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750945636/uljmooa6wwmk8nyxoya1.png",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "Sustainability Idea Hub is a web application where users can submit, discuss, and vote on eco-friendly ideas. Members can categorize ideas, comment with nested threads, and interact through a Reddit-style voting system.",
-                        "Admins can review submissions, give feedback, and highlight impactful projects. Additionally, members can monetize their ideas by marking them as 'Paid', which requires payment for access."
-                    ],
-                    "bullets": [
-                        "JWT-based authentication and role management (Member/Admin)",
-                        "Paid/free idea visibility control with SSLCommerz integration",
-                        "Nested commenting and voting system like Reddit",
-                        "Admin approval/rejection with feedback mechanism",
-                        "Search and filter ideas by keyword or category"
-                    ]
-                },
-                "warning": "Note: This project is hosted on a free tier and may take a few seconds to spin up on initial load. Sandbox payment mode is enabled."
-            },
-            {
-                "_id": "bazar-hisab",
-                "serial": 6,
-                "type": "Personal Project",
-                "companyName": "Bazar Hisab",
-                "category": ["FinTech", "Expense Tracker", "Web Application", "Mobile Application"],
-                "shortDescription": "Your family and group market expense tracker, budget planner, and daily bazar account book.",
-                "links": {
-                    "demo": {
-                        "url": "https://mybazarhisab.apponislam.top/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "live": {
-                        "url": "https://mybazarhisab.apponislam.top/",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/mybazarhisab-frontend-web",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/bazarhisab-backend",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubApp": {
-                        "url": "https://github.com/apponislam/mybazarhisab-frontend-app",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "driveApp": {
-                        "url": "https://drive.google.com/file/d/1CpzWad9sHVbts2j5phWaTq6dP4WQRaEe/view?usp=sharing",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Architected full-stack household budget tracker across Next.js web app and React Native mobile app.", "Engineered real-time shared mess accounting, market price trend analytics, and PDF invoice generation."]
-                    }
-                ],
-                "techStack": ["Next.js 16", "React 19", "React Native", "TypeScript", "Node.js", "Express.js", "MongoDB", "Mongoose", "Redux Toolkit", "RTK Query", "Tailwind CSS", "Zod", "PDFKit"],
-                "startDate": "2026-07-13",
-                "endDate": "2026-08-09",
-                "companyLogoImg": "/projects/mybazarhisab/mybazarhisab1.webp",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "Bazar Hisab is a comprehensive, full-stack financial platform and mobile application specifically designed for household budgeting, grocery market expense calculation (bazar), shared flat/mess accounting, and daily expenditure ledger management.",
-                        "The system consists of a RESTful Express.js backend, a Next.js 16 web application with admin portal features, and a cross-platform React Native mobile app. It solves common group financial management challenges by enabling real-time ledger settlement, automated bill calculations, itemized grocery logging, and analytical tracking of product price growth over time."
-                    ],
-                    "bullets": [
-                        "Bulk Bazar & Grocery Entry Grid with itemized quantity, unit, price logging, and automated user balance updating.",
-                        "Shared Mess & Household Budget Ledger supporting multi-user groups, member deposits, and instant balance calculations.",
-                        "Product Price Trend Analytics tracking historical market price fluctuations across custom categories.",
-                        "Role-Based Access Control (RBAC) with secure JWT authentication, cookie management, and user permissions.",
-                        "Cross-Platform Accessibility via Next.js web application and React Native mobile application.",
-                        "Automated Statement & Invoice Generation exporting PDF financial reports via PDFKit."
-                    ]
-                },
-                "warning": "Note: The live application is currently actively in use for my personal daily expense tracking and household budget management. However, you are welcome to create your own account to explore and test the platform."
-            },
-            {
-                "_id": "letanest",
-                "serial": 7,
-                "type": "Professional",
-                "companyName": "LetANest - Short-Term Lets & Festival Stays",
-                "category": ["Full Stack", "Travel Tech", "Property Management"],
-                "shortDescription": "A comprehensive travel and property listing platform that connects hosts and guests with seamless bookings, host verification, and real-time messaging.",
-                "links": {
-                    "demo": {
-                        "url": "https://www.letanest.com",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "live": {
-                        "url": "https://www.letanest.com",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/letanest",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/letanest-server",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Shahriar Alom Bhuiyan",
-                        "role": "UI/UX Designer",
-                        "profileImage": "/team/sahriarvai.webp",
-                        "linkedinUsername": "shahriar-alom-bhuiyan-036079225",
-                        "highlights": ["Designed intuitive user interfaces and seamless UX workflows for short-term stays and festival property listings.", "Created responsive wireframes, design system components, and interactive prototypes."]
-                    },
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Built travel & property listing platform using Next.js 15, Express 5, and Socket.io.", "Integrated Stripe membership subscriptions, host verification workflows, and real-time chat."]
-                    }
-                ],
-                "techStack": ["Next.js 15", "React 19", "Tailwind CSS v4", "Redux Toolkit", "Radix UI", "Node.js", "Express 5", "TypeScript", "MongoDB", "Mongoose", "Socket.io", "Stripe", "JWT Authentication"],
-                "startDate": "2025-11-10",
-                "endDate": "2026-02-20",
-                "companyLogoImg": "/projects/letanest/letanest1.webp",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "LetANest is an end-to-end travel and property listing platform designed to offer short-term lets and unique festival stays. It serves as a dual-sided marketplace allowing hosts to manage properties, memberships, and verify their identities, while enabling guests to discover and book unique destinations.",
-                        "The architecture consists of a modern Next.js 15 frontend optimized for SEO and performance, and a robust Node.js backend. The platform supports complex features such as tiered subscription plans, Stripe-powered payments and webhook handling, real-time messaging with host/guest chat, and automated bot messages."
-                    ],
-                    "bullets": [
-                        "Built a high-performance, responsive frontend with Next.js 15, React 19, and Tailwind CSS v4.",
-                        "Engineered a scalable backend API using Node.js, Express 5, and TypeScript.",
-                        "Implemented an advanced property management system with location, listing, and active listing workflows.",
-                        "Integrated Stripe for handling transactions, subscriptions (plans & memberships), and webhook events.",
-                        "Developed a robust Host Verification system to ensure platform trust and safety.",
-                        "Set up real-time bidirectional messaging between users using Socket.io.",
-                        "Designed a comprehensive admin dashboard to manage users, reports, reviews, and dynamic content.",
-                        "Secured the platform using custom JWT authentication, bcrypt, and global error handling strategies."
-                    ]
-                },
-                "warning": "Note: This application is live in production and actively used by real users."
-            },
-            {
-                "_id": "peptide-club",
-                "serial": 8,
-                "type": "Professional",
-                "companyName": "Peptide Club",
-                "category": ["E-Commerce", "Full Stack", "Healthcare & Research", "Web Application"],
-                "shortDescription": "A premium full-stack e-commerce platform for research peptides featuring dynamic user pricing tiers, Stripe payment integration, automated ShipStation logistics, and a comprehensive admin analytics portal.",
-                "links": {
-                    "demo": {
-                        "url": "https://peptide.club",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "live": {
-                        "url": "https://peptide.club",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubFrontend": {
-                        "url": "https://github.com/apponislam/Peptide-Frontend",
-                        "disabled": false,
-                        "private": false
-                    },
-                    "githubBackend": {
-                        "url": "https://github.com/apponislam/Peptide-Backend",
-                        "disabled": false,
-                        "private": false
-                    }
-                },
-                "contributions": [
-                    {
-                        "name": "Appon Islam",
-                        "role": "Full Stack Developer",
-                        "profileImage": "/appon.webp",
-                        "linkedinUsername": "apponislam",
-                        "highlights": ["Architected full-stack e-commerce app using Next.js 16, TypeScript, Express.js, PostgreSQL, and Prisma ORM.", "Integrated Stripe payments, ShipStation automated logistics, multi-tier memberships, and Resend notifications."]
-                    }
-                ],
-                "techStack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "Redux Toolkit", "RTK Query", "Node.js", "Express.js", "Prisma ORM", "PostgreSQL", "Stripe API", "ShipStation API", "Resend API", "Zod"],
-                "startDate": "Jan 2026",
-                "endDate": "Apr 2026",
-                "companyLogoImg": "/projects/peptide/peptide1.webp",
-                "descriptionDetails": {
-                    "paragraphs": [
-                        "PEPTIDE.CLUB is a state-of-the-art e-commerce platform custom-built for research peptides and laboratory compounds. Designed with high performance and security in mind, the platform integrates a modern Next.js 16 App Router frontend with a scalable Express.js backend infrastructure.",
-                        "The platform offers a seamless shopping experience featuring automated multi-tier discount pricing (Member, VIP, Founder), persistent cart state management powered by Redux Toolkit, secure Stripe payment processing, and automated shipping label generation through ShipStation integration.",
-                        "On the administration side, PEPTIDE.CLUB provides store managers with real-time sales analytics, product inventory management with dynamic pricing controls, customer order lifecycle tracking, and an invite-based referral system."
-                    ],
-                    "bullets": [
-                        "Architected full-stack web application using Next.js 16 (App Router), TypeScript, Express.js, PostgreSQL, and Prisma ORM.",
-                        "Integrated Stripe payment gateway with webhook handling for secure checkout sessions, payment verifications, and order previews.",
-                        "Automated logistics workflow by integrating ShipStation API for shipping order creation, rate estimation, label generation, and tracking updates.",
-                        "Designed a multi-tier membership system (Member 10%, VIP 20%, Founder 20% discounts) with referral invitation rewards and conditional free shipping.",
-                        "Implemented state management and API caching using Redux Toolkit and RTK Query with automatic JWT access and refresh token rotation.",
-                        "Configured transactional email notifications (OTP verification, order status, shipping confirmation) using Resend API.",
-                        "Engineered a dedicated Admin Panel featuring product CRUD operations, stock status toggling, soft delete/restore mechanisms, and user administration."
-                    ]
-                }
-            },
-            {
                 "_id": "djarna-p2p-social-marketplace",
-                "serial": 9,
+                "serial": 1,
                 "type": "Professional",
                 "companyName": "Djarna - P2P Social Marketplace",
                 "category": ["E-Commerce", "Marketplace", "Web Development", "Mobile App"],
@@ -821,6 +203,681 @@
                     ]
                 },
                 "warning": "Demo environment has simulated payment gateways enabled."
+            },
+            {
+                "_id": "peptide-club",
+                "serial": 2,
+                "type": "Professional",
+                "companyName": "Peptide Club",
+                "category": ["E-Commerce", "Full Stack", "Healthcare & Research", "Web Application"],
+                "shortDescription": "A premium full-stack e-commerce platform for research peptides featuring dynamic user pricing tiers, Stripe payment integration, automated ShipStation logistics, and a comprehensive admin analytics portal.",
+                "links": {
+                    "demo": {
+                        "url": "https://peptide.club",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "live": {
+                        "url": "https://peptide.club",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/Peptide-Frontend",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/Peptide-Backend",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Architected full-stack e-commerce app using Next.js 16, TypeScript, Express.js, PostgreSQL, and Prisma ORM.", "Integrated Stripe payments, ShipStation automated logistics, multi-tier memberships, and Resend notifications."]
+                    }
+                ],
+                "techStack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "Redux Toolkit", "RTK Query", "Node.js", "Express.js", "Prisma ORM", "PostgreSQL", "Stripe API", "ShipStation API", "Resend API", "Zod"],
+                "startDate": "Jan 2026",
+                "endDate": "Apr 2026",
+                "companyLogoImg": "/projects/peptide/peptide1.webp",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "PEPTIDE.CLUB is a state-of-the-art e-commerce platform custom-built for research peptides and laboratory compounds. Designed with high performance and security in mind, the platform integrates a modern Next.js 16 App Router frontend with a scalable Express.js backend infrastructure.",
+                        "The platform offers a seamless shopping experience featuring automated multi-tier discount pricing (Member, VIP, Founder), persistent cart state management powered by Redux Toolkit, secure Stripe payment processing, and automated shipping label generation through ShipStation integration.",
+                        "On the administration side, PEPTIDE.CLUB provides store managers with real-time sales analytics, product inventory management with dynamic pricing controls, customer order lifecycle tracking, and an invite-based referral system."
+                    ],
+                    "bullets": [
+                        "Architected full-stack web application using Next.js 16 (App Router), TypeScript, Express.js, PostgreSQL, and Prisma ORM.",
+                        "Integrated Stripe payment gateway with webhook handling for secure checkout sessions, payment verifications, and order previews.",
+                        "Automated logistics workflow by integrating ShipStation API for shipping order creation, rate estimation, label generation, and tracking updates.",
+                        "Designed a multi-tier membership system (Member 10%, VIP 20%, Founder 20% discounts) with referral invitation rewards and conditional free shipping.",
+                        "Implemented state management and API caching using Redux Toolkit and RTK Query with automatic JWT access and refresh token rotation.",
+                        "Configured transactional email notifications (OTP verification, order status, shipping confirmation) using Resend API.",
+                        "Engineered a dedicated Admin Panel featuring product CRUD operations, stock status toggling, soft delete/restore mechanisms, and user administration."
+                    ]
+                }
+            },
+            {
+                "_id": "letanest",
+                "serial": 3,
+                "type": "Professional",
+                "companyName": "LetANest - Short-Term Lets & Festival Stays",
+                "category": ["Full Stack", "Travel Tech", "Property Management"],
+                "shortDescription": "A comprehensive travel and property listing platform that connects hosts and guests with seamless bookings, host verification, and real-time messaging.",
+                "links": {
+                    "demo": {
+                        "url": "https://www.letanest.com",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "live": {
+                        "url": "https://www.letanest.com",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/letanest",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/letanest-server",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Shahriar Alom Bhuiyan",
+                        "role": "UI/UX Designer",
+                        "profileImage": "/team/sahriarvai.webp",
+                        "linkedinUsername": "shahriar-alom-bhuiyan-036079225",
+                        "highlights": ["Designed intuitive user interfaces and seamless UX workflows for short-term stays and festival property listings.", "Created responsive wireframes, design system components, and interactive prototypes."]
+                    },
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Built travel & property listing platform using Next.js 15, Express 5, and Socket.io.", "Integrated Stripe membership subscriptions, host verification workflows, and real-time chat."]
+                    }
+                ],
+                "techStack": ["Next.js 15", "React 19", "Tailwind CSS v4", "Redux Toolkit", "Radix UI", "Node.js", "Express 5", "TypeScript", "MongoDB", "Mongoose", "Socket.io", "Stripe", "JWT Authentication"],
+                "startDate": "2025-11-10",
+                "endDate": "2026-02-20",
+                "companyLogoImg": "/projects/letanest/letanest1.webp",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "LetANest is an end-to-end travel and property listing platform designed to offer short-term lets and unique festival stays. It serves as a dual-sided marketplace allowing hosts to manage properties, memberships, and verify their identities, while enabling guests to discover and book unique destinations.",
+                        "The architecture consists of a modern Next.js 15 frontend optimized for SEO and performance, and a robust Node.js backend. The platform supports complex features such as tiered subscription plans, Stripe-powered payments and webhook handling, real-time messaging with host/guest chat, and automated bot messages."
+                    ],
+                    "bullets": [
+                        "Built a high-performance, responsive frontend with Next.js 15, React 19, and Tailwind CSS v4.",
+                        "Engineered a scalable backend API using Node.js, Express 5, and TypeScript.",
+                        "Implemented an advanced property management system with location, listing, and active listing workflows.",
+                        "Integrated Stripe for handling transactions, subscriptions (plans & memberships), and webhook events.",
+                        "Developed a robust Host Verification system to ensure platform trust and safety.",
+                        "Set up real-time bidirectional messaging between users using Socket.io.",
+                        "Designed a comprehensive admin dashboard to manage users, reports, reviews, and dynamic content.",
+                        "Secured the platform using custom JWT authentication, bcrypt, and global error handling strategies."
+                    ]
+                },
+                "warning": "Note: This application is live in production and actively used by real users."
+            }
+        ],
+        "allProjects": [
+            {
+                "_id": "djarna-p2p-social-marketplace",
+                "serial": 1,
+                "type": "Professional",
+                "companyName": "Djarna - P2P Social Marketplace",
+                "category": ["E-Commerce", "Marketplace", "Web Development", "Mobile App"],
+                "shortDescription": "A multi-vendor peer-to-peer (P2P) social marketplace platform featuring real-time offer negotiation, Paydunya/Wave mobile payments with automated escrow holds, DExchange/Twilio SMS verification, seller wallets, Flutter mobile app, and a Next.js admin dashboard.",
+                "links": {
+                    "demo": {
+                        "url": "https://dashboard.djarna.com",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "live": {
+                        "url": "https://dashboard.djarna.com",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubApp": {
+                        "url": "https://github.com/apponislam/djarna_flutter_app",
+                        "disabled": true,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/djarna_dashboard",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/djarna_app_backend",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "googleStore": {
+                        "url": "https://play.google.com/store/apps/details?id=com.mohamed.djarna",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "appleStore": {
+                        "url": "https://apps.apple.com/us/app/djarna/id6787214492",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Ahmad Zakaria Labib",
+                        "role": "UI/UX Designer",
+                        "profileImage": "/team/labibvai.webp",
+                        "linkedinUsername": "ahmad-zakaria-labib-b798a31ab",
+                        "highlights": ["Designed intuitive UI/UX for P2P marketplace mobile app and offer negotiation screens.", "Created design system, user wireframes, and interactive prototypes for seller onboarding."]
+                    },
+                    {
+                        "name": "Rimon Islam",
+                        "role": "Flutter Developer",
+                        "profileImage": "/team/rimon.webp",
+                        "linkedinUsername": "rimon-islam-797004239",
+                        "highlights": ["Developed cross-platform Flutter application for iOS & Android with custom UI components.", "Integrated Paydunya/Wave mobile payments, push notifications, and DExchange SMS verification."]
+                    },
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Architected scalable Express.js backend with Socket.IO real-time offer negotiation & chat.", "Built Next.js admin dashboard and managed Play Store & App Store deployment pipelines."]
+                    }
+                ],
+                "techStack": ["Next.js", "TypeScript", "React", "Node.js", "Express.js", "MongoDB", "Mongoose", "Socket.IO", "Redux Toolkit", "Tailwind CSS", "Flutter", "Paydunya Gateway", "DExchange SMS API", "Twilio SMS", "Firebase FCM", "Zod", "Nodemailer", "Multer & Sharp"],
+                "startDate": "2026-05-01",
+                "endDate": "2026-08-30",
+                "companyLogoImg": "/projects/djarna/djarna1.webp",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "Djarna is a full-featured peer-to-peer (P2P) social marketplace platform designed to connect buyers and sellers seamlessly across Web and Mobile. It features a complete multi-vendor ecosystem with real-time price negotiation, listing promotions, seller wallet withdrawals, identity verification (KYC), and multi-channel payment integrations.",
+                        "The project ecosystem comprises three primary components: an Express.js & MongoDB backend REST API with Socket.IO real-time syncing, a Next.js administrative dashboard for platform moderation and business metrics analytics, and a cross-platform mobile application built with Flutter."
+                    ],
+                    "bullets": [
+                        "Engineered a Dual SMS & Email OTP Engine powered by DExchange SMS API and Twilio SMS for mobile phone verification, alongside Nodemailer SMTP fallbacks and OAuth (Google, Apple, Facebook).",
+                        "Integrated Paydunya checkout gateway supporting Mobile Money (Wave, Orange Money, Free Money, Expresso) with instant IPN webhook reconciliation and automated escrow fund release timers.",
+                        "Architected a real-time price negotiation bidding system using Socket.IO, allowing buyers and sellers to propose, counter, accept, or reject price and shipping offers directly in chat threads.",
+                        "Built a seller wallet earnings hub supporting automated payout disbursements directly to sellers' mobile money numbers upon order delivery confirmation or escrow release expiry.",
+                        "Implemented KYC Identity Verification (National ID / Passport upload + live selfie check) with admin review workflows to award official verified seller badges.",
+                        "Designed product boost & promotion packages with background cron jobs to manage boost expiry windows and send Firebase Cloud Messaging (FCM) push alerts.",
+                        "Developed a Next.js Admin Dashboard featuring live data widgets for report tracking, user management, identity verifications, dispute resolutions, and commission management."
+                    ]
+                },
+                "warning": "Demo environment has simulated payment gateways enabled."
+            },
+            {
+                "_id": "peptide-club",
+                "serial": 2,
+                "type": "Professional",
+                "companyName": "Peptide Club",
+                "category": ["E-Commerce", "Full Stack", "Healthcare & Research", "Web Application"],
+                "shortDescription": "A premium full-stack e-commerce platform for research peptides featuring dynamic user pricing tiers, Stripe payment integration, automated ShipStation logistics, and a comprehensive admin analytics portal.",
+                "links": {
+                    "demo": {
+                        "url": "https://peptide.club",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "live": {
+                        "url": "https://peptide.club",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/Peptide-Frontend",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/Peptide-Backend",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Architected full-stack e-commerce app using Next.js 16, TypeScript, Express.js, PostgreSQL, and Prisma ORM.", "Integrated Stripe payments, ShipStation automated logistics, multi-tier memberships, and Resend notifications."]
+                    }
+                ],
+                "techStack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "Redux Toolkit", "RTK Query", "Node.js", "Express.js", "Prisma ORM", "PostgreSQL", "Stripe API", "ShipStation API", "Resend API", "Zod"],
+                "startDate": "Jan 2026",
+                "endDate": "Apr 2026",
+                "companyLogoImg": "/projects/peptide/peptide1.webp",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "PEPTIDE.CLUB is a state-of-the-art e-commerce platform custom-built for research peptides and laboratory compounds. Designed with high performance and security in mind, the platform integrates a modern Next.js 16 App Router frontend with a scalable Express.js backend infrastructure.",
+                        "The platform offers a seamless shopping experience featuring automated multi-tier discount pricing (Member, VIP, Founder), persistent cart state management powered by Redux Toolkit, secure Stripe payment processing, and automated shipping label generation through ShipStation integration.",
+                        "On the administration side, PEPTIDE.CLUB provides store managers with real-time sales analytics, product inventory management with dynamic pricing controls, customer order lifecycle tracking, and an invite-based referral system."
+                    ],
+                    "bullets": [
+                        "Architected full-stack web application using Next.js 16 (App Router), TypeScript, Express.js, PostgreSQL, and Prisma ORM.",
+                        "Integrated Stripe payment gateway with webhook handling for secure checkout sessions, payment verifications, and order previews.",
+                        "Automated logistics workflow by integrating ShipStation API for shipping order creation, rate estimation, label generation, and tracking updates.",
+                        "Designed a multi-tier membership system (Member 10%, VIP 20%, Founder 20% discounts) with referral invitation rewards and conditional free shipping.",
+                        "Implemented state management and API caching using Redux Toolkit and RTK Query with automatic JWT access and refresh token rotation.",
+                        "Configured transactional email notifications (OTP verification, order status, shipping confirmation) using Resend API.",
+                        "Engineered a dedicated Admin Panel featuring product CRUD operations, stock status toggling, soft delete/restore mechanisms, and user administration."
+                    ]
+                }
+            },
+            {
+                "_id": "letanest",
+                "serial": 3,
+                "type": "Professional",
+                "companyName": "LetANest - Short-Term Lets & Festival Stays",
+                "category": ["Full Stack", "Travel Tech", "Property Management"],
+                "shortDescription": "A comprehensive travel and property listing platform that connects hosts and guests with seamless bookings, host verification, and real-time messaging.",
+                "links": {
+                    "demo": {
+                        "url": "https://www.letanest.com",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "live": {
+                        "url": "https://www.letanest.com",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/letanest",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/letanest-server",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Shahriar Alom Bhuiyan",
+                        "role": "UI/UX Designer",
+                        "profileImage": "/team/sahriarvai.webp",
+                        "linkedinUsername": "shahriar-alom-bhuiyan-036079225",
+                        "highlights": ["Designed intuitive user interfaces and seamless UX workflows for short-term stays and festival property listings.", "Created responsive wireframes, design system components, and interactive prototypes."]
+                    },
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Built travel & property listing platform using Next.js 15, Express 5, and Socket.io.", "Integrated Stripe membership subscriptions, host verification workflows, and real-time chat."]
+                    }
+                ],
+                "techStack": ["Next.js 15", "React 19", "Tailwind CSS v4", "Redux Toolkit", "Radix UI", "Node.js", "Express 5", "TypeScript", "MongoDB", "Mongoose", "Socket.io", "Stripe", "JWT Authentication"],
+                "startDate": "2025-11-10",
+                "endDate": "2026-02-20",
+                "companyLogoImg": "/projects/letanest/letanest1.webp",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "LetANest is an end-to-end travel and property listing platform designed to offer short-term lets and unique festival stays. It serves as a dual-sided marketplace allowing hosts to manage properties, memberships, and verify their identities, while enabling guests to discover and book unique destinations.",
+                        "The architecture consists of a modern Next.js 15 frontend optimized for SEO and performance, and a robust Node.js backend. The platform supports complex features such as tiered subscription plans, Stripe-powered payments and webhook handling, real-time messaging with host/guest chat, and automated bot messages."
+                    ],
+                    "bullets": [
+                        "Built a high-performance, responsive frontend with Next.js 15, React 19, and Tailwind CSS v4.",
+                        "Engineered a scalable backend API using Node.js, Express 5, and TypeScript.",
+                        "Implemented an advanced property management system with location, listing, and active listing workflows.",
+                        "Integrated Stripe for handling transactions, subscriptions (plans & memberships), and webhook events.",
+                        "Developed a robust Host Verification system to ensure platform trust and safety.",
+                        "Set up real-time bidirectional messaging between users using Socket.io.",
+                        "Designed a comprehensive admin dashboard to manage users, reports, reviews, and dynamic content.",
+                        "Secured the platform using custom JWT authentication, bcrypt, and global error handling strategies."
+                    ]
+                },
+                "warning": "Note: This application is live in production and actively used by real users."
+            },
+            {
+                "_id": "bazar-hisab",
+                "serial": 4,
+                "type": "Personal Project",
+                "companyName": "Bazar Hisab",
+                "category": ["FinTech", "Expense Tracker", "Web Application", "Mobile Application"],
+                "shortDescription": "Your family and group market expense tracker, budget planner, and daily bazar account book.",
+                "links": {
+                    "demo": {
+                        "url": "https://mybazarhisab.apponislam.top/",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "live": {
+                        "url": "https://mybazarhisab.apponislam.top/",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/mybazarhisab-frontend-web",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/bazarhisab-backend",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubApp": {
+                        "url": "https://github.com/apponislam/mybazarhisab-frontend-app",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "driveApp": {
+                        "url": "https://drive.google.com/file/d/1CpzWad9sHVbts2j5phWaTq6dP4WQRaEe/view?usp=sharing",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Architected full-stack household budget tracker across Next.js web app and React Native mobile app.", "Engineered real-time shared mess accounting, market price trend analytics, and PDF invoice generation."]
+                    }
+                ],
+                "techStack": ["Next.js 16", "React 19", "React Native", "TypeScript", "Node.js", "Express.js", "MongoDB", "Mongoose", "Redux Toolkit", "RTK Query", "Tailwind CSS", "Zod", "PDFKit"],
+                "startDate": "2026-07-13",
+                "endDate": "2026-08-09",
+                "companyLogoImg": "/projects/mybazarhisab/mybazarhisab1.webp",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "Bazar Hisab is a comprehensive, full-stack financial platform and mobile application specifically designed for household budgeting, grocery market expense calculation (bazar), shared flat/mess accounting, and daily expenditure ledger management.",
+                        "The system consists of a RESTful Express.js backend, a Next.js 16 web application with admin portal features, and a cross-platform React Native mobile app. It solves common group financial management challenges by enabling real-time ledger settlement, automated bill calculations, itemized grocery logging, and analytical tracking of product price growth over time."
+                    ],
+                    "bullets": [
+                        "Bulk Bazar & Grocery Entry Grid with itemized quantity, unit, price logging, and automated user balance updating.",
+                        "Shared Mess & Household Budget Ledger supporting multi-user groups, member deposits, and instant balance calculations.",
+                        "Product Price Trend Analytics tracking historical market price fluctuations across custom categories.",
+                        "Role-Based Access Control (RBAC) with secure JWT authentication, cookie management, and user permissions.",
+                        "Cross-Platform Accessibility via Next.js web application and React Native mobile application.",
+                        "Automated Statement & Invoice Generation exporting PDF financial reports via PDFKit."
+                    ]
+                },
+                "warning": "Note: The live application is currently actively in use for my personal daily expense tracking and household budget management. However, you are welcome to create your own account to explore and test the platform."
+            },
+            {
+                "_id": "sustainability-idea-hub",
+                "serial": 5,
+                "type": "Personal Project",
+                "companyName": "Sustainability Idea Hub",
+                "category": ["Full Stack", "Web Dev"],
+                "shortDescription": "A full-stack platform for sharing and managing sustainability-focused ideas with role-based access, voting, comments, and paid content system.",
+                "links": {
+                    "demo": {
+                        "url": "https://idea-hub-client.vercel.app/",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "live": {
+                        "url": "https://idea-hub-client.vercel.app/",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/idea-hub-client",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/idea-hub-server",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Created full-stack idea sharing platform with PostgreSQL, Prisma ORM, and Next.js.", "Implemented SSLCommerz paid content access, Reddit-style nested comments, and voting."]
+                    }
+                ],
+                "techStack": ["Next.js", "React", "Tailwind CSS", "Node.js", "Express.js", "Typescript", "PostgreSQL", "Prisma", "JWT"],
+                "startDate": "2025-03-10",
+                "endDate": "2025-05-01",
+                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750945636/uljmooa6wwmk8nyxoya1.png",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "Sustainability Idea Hub is a web application where users can submit, discuss, and vote on eco-friendly ideas. Members can categorize ideas, comment with nested threads, and interact through a Reddit-style voting system.",
+                        "Admins can review submissions, give feedback, and highlight impactful projects. Additionally, members can monetize their ideas by marking them as 'Paid', which requires payment for access."
+                    ],
+                    "bullets": [
+                        "JWT-based authentication and role management (Member/Admin)",
+                        "Paid/free idea visibility control with SSLCommerz integration",
+                        "Nested commenting and voting system like Reddit",
+                        "Admin approval/rejection with feedback mechanism",
+                        "Search and filter ideas by keyword or category"
+                    ]
+                },
+                "warning": "Note: This project is hosted on a free tier and may take a few seconds to spin up on initial load. Sandbox payment mode is enabled."
+            },
+            {
+                "_id": "appon-painting-drawing",
+                "serial": 6,
+                "type": "Personal Project",
+                "companyName": "Appon Painting & Drawing",
+                "category": ["Full Stack", "Web Dev"],
+                "shortDescription": "Appon Painting & Drawing is a Jute & Wooden-Craft e-commerce platform with secure auth, private dashboards, and fully responsive design.",
+                "links": {
+                    "demo": {
+                        "url": "https://assignmentb9a10.web.app/",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/painting-drawing-client",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/painting-drawing-server",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Developed craft e-commerce application with category/sub-category browsing & management.", "Integrated Firebase auth, JWT protected routes, dark/light theme, and CRUD dashboards."]
+                    }
+                ],
+                "techStack": ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Firebase", "Typescript", "Javascript", "HTML 5", "CSS 3", "Google Auth"],
+                "startDate": "2025-06-12",
+                "endDate": "2025-06-26",
+                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750959177/q5uqgngk8eubzpk0nwe3.png",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "CraftNest lets artists and buyers connect over unique jute and wooden crafts. Users can securely add, update, and manage their own products, while visitors explore curated items by sub-category.",
+                        "The site features JWT-protected routes, Google/Firebase authentication, TanStack-Query data fetching, and dark/light theme switching for an engaging shopping experience."
+                    ],
+                    "bullets": [
+                        "Private dashboards for adding, updating, and deleting crafts",
+                        "Category & sub-category filtering with responsive UI",
+                        "Form validation and toast notifications for all CRUD actions",
+                        "Dark / light theme toggle and Lottie animations on the home page",
+                        "Fully environment-secured Firebase & MongoDB credentials"
+                    ]
+                }
+            },
+            {
+                "_id": "appon-assignment-library",
+                "serial": 7,
+                "type": "Personal Project",
+                "companyName": "Appon Assignment Library",
+                "category": ["Full Stack", "Web Dev"],
+                "shortDescription": "An online group study platform built with the MERN stack allowing users to create, attempt, and grade assignments collaboratively with secure auth, role-based logic, and PDF preview.",
+                "links": {
+                    "demo": {
+                        "url": "https://assignmentb9a11.web.app/",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/assignments-client",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/assignments-server",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Engineered collaborative study platform allowing users to create, attempt, and grade assignments.", "Implemented PDF preview integration, JWT auth, theme toggle, and react-hook-form validation."]
+                    }
+                ],
+                "techStack": ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Firebase", "Typescript", "Javascript", "HTML 5", "CSS 3", "Google Auth"],
+                "startDate": "2025-06-10",
+                "endDate": "2025-06-26",
+                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750943676/btd2rfqpojdayjpuug2q.png",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "GroupStudy Hub is a MERN stack web app for students to collaboratively create, take, and evaluate assignments. Each user can post new assignments, attempt others', and grade pending submissions from friends. The system supports file-based submissions, grading workflows, and personalized dashboards.",
+                        "The platform features a custom design, PDF preview in submitted assignments, JWT-based protected routes, responsive layout, and dark/light mode toggle for better user experience."
+                    ],
+                    "bullets": [
+                        "JWT-based auth with token storage in localStorage for Email/Google login",
+                        "Create, view, filter, update, and delete assignments (CRUD)",
+                        "Only the creator can delete an assignment (with secure checks)",
+                        "Users can submit assignments via link + notes with file preview support",
+                        "Admins and users can mark assignments and give feedback",
+                        "Dark/Light theme toggle for accessibility and user preference",
+                        "PDF preview in iframe on submitted assignments page",
+                        "Form validation on all forms with `react-hook-form`",
+                        "Difficulty level filtering using a dropdown menu",
+                        "Responsive design for desktop, tablet, and mobile devices"
+                    ]
+                }
+            },
+            {
+                "_id": "ap-classroom",
+                "serial": 8,
+                "type": "Personal Project",
+                "companyName": "AP Classroom",
+                "category": ["Full Stack", "Web Dev"],
+                "shortDescription": "A MERN-stack learning-management platform with role-based dashboards for students, teachers, and admins, featuring class creation, enrollment, assignments, payments, and comprehensive analytics.",
+                "links": {
+                    "demo": {
+                        "url": "https://assignmentb9a12.web.app/",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/Classrooms-client",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/Classrooms-server",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Built MERN learning management system with role-based dashboards for students, teachers, and admins.", "Implemented class approval workflows, TanStack Query caching, and SurjoPay course enrollment."]
+                    }
+                ],
+                "techStack": ["React", "Next.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT", "TanStack Query", "react-hook-form", "SurjoPay"],
+                "startDate": "2025-05-15",
+                "endDate": "2025-06-26",
+                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750942876/alwzdx9qsdzhzneplt6g.png",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "EduManage streamlines class management by connecting institutions, tutors, and students on a single, responsive platform. Users register securely, browse approved classes, and enroll using SurjoPay-powered checkout.",
+                        "Role-based dashboards empower teachers to add classes and assignments, students to track progress and submit work, and admins to approve content, handle user roles, and monitor site analytics—all with real-time feedback and toast notifications."
+                    ],
+                    "bullets": [
+                        "JWT authentication with secure password hashing",
+                        "Student, Teacher, and Admin dashboards with protected routes",
+                        "Teacher request workflow and class approval pipeline",
+                        "TanStack Query for optimized GET data fetching",
+                        "Full CRUD on users, classes, orders, and assignments",
+                        "Nested feedback system displayed on the Home page",
+                        "SurjoPay integration for paid course enrollment",
+                        "Responsive UI for mobile, tablet, and desktop",
+                        "Toast alerts for all CRUD operations and auth events",
+                        "Environment-secured MongoDB & Firebase credentials"
+                    ]
+                }
+            },
+            {
+                "_id": "bike-shop-application",
+                "serial": 9,
+                "type": "Personal Project",
+                "companyName": "Bike Shop Application",
+                "category": ["Full Stack", "Web Dev"],
+                "shortDescription": "A complete bike e-commerce platform with secure JWT-based authentication, role-based dashboards, product filters, and integrated SurjoPay payment system.",
+                "links": {
+                    "demo": {
+                        "url": "https://peppy-hotteok-65ea2d.netlify.app/",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubFrontend": {
+                        "url": "https://github.com/apponislam/bike-store-frontend",
+                        "disabled": false,
+                        "private": false
+                    },
+                    "githubBackend": {
+                        "url": "https://github.com/apponislam/bike-store-backend",
+                        "disabled": false,
+                        "private": false
+                    }
+                },
+                "contributions": [
+                    {
+                        "name": "Appon Islam",
+                        "role": "Full Stack Developer",
+                        "profileImage": "/appon.webp",
+                        "linkedinUsername": "apponislam",
+                        "highlights": ["Developed full-stack bike e-commerce platform with Next.js, Express.js, and MongoDB.", "Integrated JWT role authentication, product filter workflows, and SurjoPay checkout."]
+                    }
+                ],
+                "techStack": ["Next.js", "React", "Tailwind CSS", "Node.js", "Express.js", "Typescript", "MongoDB", "JWT", "SurjoPay"],
+                "startDate": "2025-04-01",
+                "endDate": "2025-06-10",
+                "companyLogoImg": "https://res.cloudinary.com/dqkx3gcnm/image/upload/v1750945838/iihrwdulbus4qb2gel5v.png",
+                "descriptionDetails": {
+                    "paragraphs": [
+                        "Bike Shop is an online platform that allows customers to browse, search, and filter bikes with ease. Authenticated users can place orders, track status, and manage their profiles securely.",
+                        "Admins can manage all users, orders, and product listings with complete control from their dedicated dashboard. SurjoPay is integrated for secure payment transactions."
+                    ],
+                    "bullets": ["JWT-based role authentication for customers and admins", "Dynamic search, filters, and product detail pages", "SurjoPay integration for secure checkout", "Admin dashboard for user, product, and order management", "Track orders with real-time status updates"]
+                }
             }
         ]
     },
@@ -914,7 +971,7 @@
         {
             "topic": "featured_projects",
             "question": "What are Appon's top featured projects?",
-            "answer": "Key featured projects include: 1) Bike Shop Application (full-stack e-commerce with SurjoPay & JWT auth); 2) AP Classroom (learning management system with course monetization & Stripe); 3) Appon Assignment Library (academic repository for university resources); 4) Sustainability Idea Hub; 5) LetANest (short-term rental and stay booking); 6) Peptide Club; and 7) Djarna (P2P Social Marketplace)."
+            "answer": "Key featured projects in order (from newest to oldest) are: 1) Djarna - P2P Social Marketplace (P2P marketplace with Flutter mobile app, Express.js backend, Socket.IO bidding, and Paydunya); 2) Peptide Club (Custom e-commerce with Next.js 16, Stripe, and ShipStation); 3) LetANest - Short-Term Lets & Festival Stays (Travel booking platform); 4) Bazar Hisab (Financial ledger & grocery tracker); 5) Sustainability Idea Hub; 6) Appon Painting & Drawing; 7) Appon Assignment Library; 8) AP Classroom; and 9) Bike Shop Application."
         },
         {
             "topic": "contact_and_hiring",
