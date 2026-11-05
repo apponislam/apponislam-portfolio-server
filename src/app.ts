@@ -14,7 +14,7 @@ const app: Application = express();
 const corsOptions = {
     origin: ["http://localhost:3000", "http://localhost:3001", "https://apponislam.top", "https://www.apponislam.top", "https://apponislam.com", "https://www.apponislam.com", "http://apponislam.com", "http://www.apponislam.com"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept", "Cache-Control", "X-Requested-With"],
     credentials: true,
 };
 

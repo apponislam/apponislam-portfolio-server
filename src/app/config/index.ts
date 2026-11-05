@@ -32,4 +32,13 @@ export default {
         password: process.env.INITIAL_ADMIN_PASSWORD,
         phone: process.env.INITIAL_ADMIN_PHONE,
     },
+
+    ollama: {
+        url: process.env.OLLAMA_API_URL,
+        model: process.env.OLLAMA_MODEL,
+        sessionExpiresInDays: process.env.CHAT_SESSION_EXPIRES_IN_DAYS,
+        systemPrompt: process.env.OLLAMA_SYSTEM_PROMPT,
+    },
 };
+
+

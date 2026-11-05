@@ -3,6 +3,7 @@ import { authRoutes } from "../modules/auth/auth.routes";
 import { contactRoutes } from "../modules/contact/contact.routes";
 import { pageAnalyticsRoutes } from "../modules/page-analytics/pageAnalytics.routes";
 import { activityRoutes } from "../modules/activity/activity.routes";
+import { chatRoutes } from "../modules/chat/chat.routes";
 
 const router = express.Router();
 
@@ -22,6 +23,10 @@ const moduleRoutes = [
     {
         path: "/activities",
         route: activityRoutes,
+    },
+    {
+        path: "/chat",
+        route: chatRoutes,
     },
 ];
 
