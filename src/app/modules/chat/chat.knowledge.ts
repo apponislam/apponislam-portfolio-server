@@ -299,3 +299,111 @@ ${projectLines.join("\n")}
 ${customEnvPrompt ? `\n### ADDITIONAL INSTRUCTIONS:\n${customEnvPrompt}` : ""}
 `.trim();
 };
+
+/**
+ * Check if the query matches one of the 4 flagship suggestion chips:
+ * 1. Tech Stack & Skills (Frameworks, languages, databases)
+ * 2. Featured Projects (Full-stack apps, architecture, live demos)
+ * 3. Experience & Background (Work history and professional roles)
+ * 4. Hire & Contact (Availability, email, and social links)
+ *
+ * If matched, returns an immediate, grounded markdown response to eliminate 5-10s Ollama latency.
+ */
+export const getPresetAnswer = (userQuery: string): string | null => {
+    const norm = userQuery
+        .toLowerCase()
+        .replace(/[^a-z0-9 ]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    if (!norm) return null;
+
+    const data = loadPortfolioData();
+    if (!data) return null;
+
+    const p = data.profile || {};
+    const stats = data.statistics || {};
+    const email = p.email || "apponislamdev@gmail.com";
+    const phone = p.phone || "+8801722779803";
+    const resumeUrl = p.resumeUrl || "https://drive.google.com/file/d/1A29W_NKb_N3VPjADS4tWapnEQUzmnQFs/view?usp=sharing";
+    const website = data.meta?.websiteUrl || "https://www.apponislam.com";
+
+    // 1. Tech Stack & Skills
+    if (
+        norm.includes("tech stack") ||
+        norm.includes("frameworks languages databases") ||
+        norm === "skills" ||
+        norm.includes("technical skills") ||
+        (norm.includes("skill") && (norm.includes("stack") || norm.includes("technolog")))
+    ) {
+        const skillLines: string[] = [];
+        const skillsSource = data.skills?.categorized || data.skills || {};
+        for (const [cat, items] of Object.entries(skillsSource)) {
+            if (Array.isArray(items) && items.length > 0) {
+                skillLines.push(`* **${cat}**: ${items.join(", ")}`);
+            }
+        }
+
+        return `Here is a comprehensive breakdown of Appon Islam's core technical skills and stack:\n\n${skillLines.join("\n")}\n\nAppon specializes in building scalable, production-ready full-stack applications with clean code, robust API architecture, and seamless user experiences.`;
+    }
+
+    // 2. Featured Projects (Exact Priority Order, Djarna #1)
+    if (
+        norm.includes("featured project") ||
+        norm.includes("full stack apps architecture live demos") ||
+        norm.includes("featured apps") ||
+        norm.includes("key projects") ||
+        (norm.includes("project") && (norm.includes("show") || norm.includes("list") || norm.includes("tell me about") || norm.includes("work")))
+    ) {
+        const allProjects = data.projects?.allProjects || [];
+        const projectLines = allProjects.slice(0, 5).map((proj, idx) => {
+            const pName = proj.companyName || proj.title;
+            const demoUrl = proj.links?.demo?.url && !proj.links.demo.disabled ? proj.links.demo.url : proj.liveUrl;
+            const ghFront = proj.links?.githubFrontend?.url && !proj.links.githubFrontend.disabled ? proj.links.githubFrontend.url : proj.githubUrl;
+            const links: string[] = [];
+            if (demoUrl) links.push(`[Live Demo](${demoUrl})`);
+            if (ghFront) links.push(`[GitHub Repo](${ghFront})`);
+            const linksStr = links.length ? ` — ${links.join(" | ")}` : "";
+            const summary = (proj.shortDescription || proj.description || "").split(".")[0] + ".";
+            const tech = (proj.techStack || []).slice(0, 6).join(", ");
+            return `${idx + 1}. **${pName}**${linksStr}\n   ${summary}${tech ? ` *(Tech: ${tech})*` : ""}`;
+        });
+
+        return `Here are Appon's key featured projects in priority order:\n\n${projectLines.join("\n\n")}\n\nFeel free to ask for technical deep dives, architecture details, or github repositories for any of these projects!`;
+    }
+
+    // 3. Experience & Background
+    if (
+        norm.includes("experience background") ||
+        norm.includes("work history") ||
+        norm.includes("professional roles") ||
+        norm.includes("work history and professional roles") ||
+        (norm.includes("experience") && (norm.includes("background") || norm.includes("history") || norm.includes("work") || norm.includes("years")))
+    ) {
+        const expList = data.experience || [];
+        const expLines = expList.map((e) => {
+            const desc = e.description ? `\n   ${e.description.join(" ")}` : "";
+            return `* **${e.title}** at **${e.organization}** (${e.duration})${desc}`;
+        });
+
+        return `Here is an overview of Appon Islam's professional experience and background:\n\n${expLines.join("\n\n")}\n\nAppon has ${stats.yearsOfCodingExperience || "4+"} years of hands-on coding experience, building scalable full-stack applications, designing robust database schemas, and leading collaborative projects.`;
+    }
+
+    // 4. Hire & Contact
+    if (
+        norm.includes("hire contact") ||
+        norm.includes("availability email") ||
+        norm.includes("availability email and social links") ||
+        norm.includes("contact or hire") ||
+        norm.includes("hire appon") ||
+        norm.includes("contact appon") ||
+        norm.includes("how can i contact") ||
+        norm.includes("how to contact") ||
+        norm.includes("how to hire")
+    ) {
+        return `Appon Islam is currently **Open to Work** and actively available for full-time software engineering roles, contracts, and freelance projects!\n\nYou can reach out to him directly through the following official channels:\n\n* **Email**: [${email}](mailto:${email})\n* **Phone / WhatsApp**: [${phone}](tel:${phone.replace(/[^0-9+]/g, "")})\n* **Resume / CV**: [View Resume (Google Drive)](${resumeUrl})\n* **LinkedIn**: [linkedin.com/in/apponislam](https://www.linkedin.com/in/apponislam/)\n* **GitHub**: [github.com/apponislam](https://github.com/apponislam)\n* **Portfolio**: [${website}](${website})\n\nFeel free to message him directly via Email or WhatsApp to discuss job opportunities, project requirements, or technical consultations.`;
+    }
+
+    return null;
+};
+

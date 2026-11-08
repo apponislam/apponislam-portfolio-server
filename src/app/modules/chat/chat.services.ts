@@ -5,7 +5,7 @@ import config from "../../config";
 import ApiError from "../../../errors/ApiError";
 import { IChatMessage, IChatSession, IOllamaChatMessage, IOllamaChatStreamChunk, IPaginatedChatMessages, ISSEStreamPayload } from "./chat.interface";
 import { ChatMessage, ChatSession } from "./chat.model";
-import { buildPortfolioSystemPrompt } from "./chat.knowledge";
+import { buildPortfolioSystemPrompt, getPresetAnswer } from "./chat.knowledge";
 
 /**
  * Check if a session has expired based on its expiresAt timestamp.
@@ -250,7 +250,59 @@ const streamChat = async function* (sessionId: string, userMessageContent: strin
         throw new ApiError(httpStatus.BAD_REQUEST, "Message cannot be empty");
     }
 
-    // 2. Retrieve completed conversation history
+    // 2. Fast-Path: Instant streaming for the 4 flagship suggestion chips
+    const presetAnswer = getPresetAnswer(trimmedUserMessage);
+    if (presetAnswer) {
+        // Save user message in MongoDB
+        await ChatMessage.create({
+            session: sessionId,
+            role: "user",
+            content: trimmedUserMessage,
+            status: "completed",
+        });
+
+        // Create completed assistant message in MongoDB
+        const assistantMessage = await ChatMessage.create({
+            session: sessionId,
+            role: "assistant",
+            content: presetAnswer,
+            status: "completed",
+        });
+
+        // Update session counters
+        await ChatSession.updateOne(
+            { sessionId },
+            {
+                $inc: { messageCount: 2 },
+                $set: { lastActivityAt: new Date() },
+            }
+        );
+
+        // Stream out chunks with a rapid typing cadence (~20ms per token chunk)
+        const words = presetAnswer.split(/(?<=\s+)/);
+        const chunkSize = 3;
+
+        for (let i = 0; i < words.length; i += chunkSize) {
+            if (signal?.aborted) break;
+            const chunk = words.slice(i, i + chunkSize).join("");
+            yield {
+                content: chunk,
+                done: false,
+            };
+            await new Promise((resolve) => setTimeout(resolve, 20));
+        }
+
+        yield {
+            content: "",
+            done: true,
+            messageId: assistantMessage._id.toString(),
+            sessionId,
+        };
+
+        return;
+    }
+
+    // 3. Retrieve completed conversation history
     const previousMessages = await ChatMessage.find({
         session: sessionId,
         status: "completed",
@@ -313,7 +365,7 @@ const streamChat = async function* (sessionId: string, userMessageContent: strin
                 messages: ollamaMessages,
                 stream: true,
                 options: {
-                    num_ctx: 2048,
+                    num_ctx: 4096,
                     num_predict: 250,
                     temperature: 0.3,
                 },
