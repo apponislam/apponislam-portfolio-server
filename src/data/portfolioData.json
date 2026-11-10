@@ -105,8 +105,8 @@
         "yearsOfCodingExperience": "4+"
     },
     "skills": {
-        "Programming Languages": ["TypeScript", "JavaScript", "C++", "HTML 5", "CSS 3"],
-        "Frontend": ["React", "Next.js", "Redux Toolkit", "RTK Query", "Tailwind CSS", "Bootstrap", "Material UI", "Shadcn UI", "Ant Design", "React Native"],
+        "Programming Languages": ["TypeScript", "JavaScript", "C++"],
+        "Frontend": ["HTML 5", "CSS 3", "React", "Next.js", "Redux Toolkit", "RTK Query", "Tailwind CSS", "Bootstrap", "Material UI", "Shadcn UI", "Ant Design", "React Native"],
         "Backend": ["Node.js", "Express.js", "Socket.io", "GraphQL", "RESTful APIs", "JWT", "OAuth 2.0", "Passport.js", "BullMQ", "RabbitMQ"],
         "Database & ORM/ODM": ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Mongoose", "Prisma"],
         "Payments & Notifications": ["SurjoPay", "SSLCommerz", "Stripe", "Firebase Cloud Messaging (FCM)", "Twilio SMS", "DExchange SMS API", "Resend", "Nodemailer"],
